@@ -1,4 +1,4 @@
-import 'package:chat_app/core/providers/auth_providers.dart';
+import 'package:chat_app/core/providers/auth/auth_providers.dart';
 import 'package:chat_app/utils/splash_screen.dart';
 import 'package:chat_app/view/onboarding/onboarding.dart';
 import 'package:chat_app/view/chats/friends/friends_list.dart';
@@ -9,114 +9,110 @@ import 'package:chat_app/view/discover/discover.dart';
 import 'package:chat_app/view/chats/messages/messages_view.dart';
 import 'package:chat_app/view/profile/widgets/selected.dart';
 import 'package:chat_app/view/profile/profile_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final routerProvider = Provider<GoRouter>(
-  (ref) {
-    final authState = ref.watch(authStateProvider);
+part 'routes.g.dart';
 
-    return GoRouter(
-      routes: [
-        GoRoute(
-          path: '/',
-          builder: (context, state) {
-            return const HomePage();
-          },
-        ),
-        /* GoRoute(
-    path: '/chatthread',
-    builder: (context, state) {
-      return const ChatThreadsScreen();
-    },
-  ),*/
-/*  GoRoute(
-    path: '/videochat',
-    builder: (context, state) {
-      return const VideoChatScreen();
-    },
-  ), */
-        GoRoute(
-          path: '/discover',
-          builder: (context, state) {
-            return const DiscoverPage();
-          },
-        ),
-        GoRoute(
-          path: '/camera',
-          builder: (context, state) {
-            return const CameraDisplay();
-          },
-        ),
-        GoRoute(
-          path: '/chat',
-          builder: (context, state) {
-            return const ChatPage();
-          },
-        ),
-        GoRoute(
-          path: '/messages',
-          name: 'messages',
-          builder: (context, state) {
-            return const MessagesView();
-          },
-        ),
-        GoRoute(
-          path: '/profile',
-          builder: (context, state) {
-            return const ProfilePage();
-          },
-        ),
-        GoRoute(
-          path: '/friends',
-          builder: (context, state) {
-            return const FriendsList();
-          },
-        ),
-        GoRoute(
-          path: '/selected/:name/:snaps/:following/:image',
-          name: 'selected',
-          builder: (context, state) {
-            return SelectedProfile(
-              name: state.pathParameters['name']!,
-              snaps: state.pathParameters['snaps']!,
-              following: state.pathParameters['following']!,
-              image: state.pathParameters['image']!,
-            );
-          },
-        ),
-        GoRoute(
-          path: '/splash',
-          builder: (context, state) {
-            return const SplashScreen();
-          },
-        ),
-        GoRoute(
-          path: '/onboarding',
-          builder: (context, state) {
-            return const OnboardingPage();
-          },
-        ),
-      ],
-      redirect: (context, state) {
-        final isAuth = authState.valueOrNull != null;
-        final bool isLogin = state.matchedLocation == '/onboarding';
-        final bool isSplash = state.matchedLocation == '/splash';
+/// Determines where GoRouter should redirect based on current auth state.
+///
+/// Returns null to mean "stay on the current route".
+/// - While loading or on error: no redirect (avoids redirect loops).
+/// - `/splash` → home if authenticated, `/onboarding` if not.
+/// - `/onboarding` → home if already authenticated.
+/// - Any other route → `/splash` if unauthenticated.
+String? computeRedirect(AsyncValue<User?> authAsync, String location) {
+  if (authAsync.isLoading || authAsync.hasError) return null;
+  final isAuth = authAsync.asData?.value != null;
+  if (location == '/splash') return isAuth ? '/' : '/onboarding';
+  if (location == '/onboarding') return isAuth ? '/' : null;
+  return isAuth ? null : '/splash';
+}
 
-        if (authState.isLoading || authState.hasError) {
-          return null;
-        }
+/// Bridges Riverpod auth state changes into a [ChangeNotifier] so GoRouter
+/// can refresh its redirect logic whenever auth state changes.
+class _RouterNotifier extends ChangeNotifier {
+  _RouterNotifier(Ref ref) {
+    ref.listen(authStateProvider, (previous, next) => notifyListeners());
+  }
+}
 
-        if (isSplash) {
-          return isAuth ? '/' : '/onboarding';
-        }
+/// Riverpod provider that creates and owns the app's [GoRouter].
+///
+/// Kept alive so the router is never recreated during the app's lifetime.
+/// Registers [_RouterNotifier] as the refresh listenable so any Firebase
+/// auth state change triggers route re-evaluation.
+///
+/// Routes defined:
+/// - `/`            — [HomePage] (main shell with bottom nav)
+/// - `/discover`    — [DiscoverPage]
+/// - `/camera`      — [CameraDisplay]
+/// - `/chat`        — [ChatPage]
+/// - `/messages`    — [MessagesView] (requires `selectedRoom` to be set first)
+/// - `/profile`     — [ProfilePage]
+/// - `/friends`     — [FriendsList]
+/// - `/selected/:name/:snaps/:following/:image` — [SelectedProfile]
+/// - `/splash`      — [SplashScreen] (shown while auth state is resolving)
+/// - `/onboarding`  — [OnboardingPage] (login / register / forgot-password)
+@Riverpod(keepAlive: true)
+GoRouter router(Ref ref) {
+  final notifier = _RouterNotifier(ref);
+  ref.onDispose(notifier.dispose);
 
-        if (isLogin) {
-          return isAuth ? '/' : null;
-        }
-
-        return isAuth ? null : '/splash';
-      },
-    );
-  },
-);
+  return GoRouter(
+    refreshListenable: notifier,
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const HomePage(),
+      ),
+      GoRoute(
+        path: '/discover',
+        builder: (context, state) => const DiscoverPage(),
+      ),
+      GoRoute(
+        path: '/camera',
+        builder: (context, state) => const CameraDisplay(),
+      ),
+      GoRoute(
+        path: '/chat',
+        builder: (context, state) => const ChatPage(),
+      ),
+      GoRoute(
+        path: '/messages',
+        name: 'messages',
+        builder: (context, state) => const MessagesView(),
+      ),
+      GoRoute(
+        path: '/profile',
+        builder: (context, state) => const ProfilePage(),
+      ),
+      GoRoute(
+        path: '/friends',
+        builder: (context, state) => const FriendsList(),
+      ),
+      GoRoute(
+        path: '/selected/:name/:snaps/:following/:image',
+        name: 'selected',
+        builder: (context, state) => SelectedProfile(
+          name: state.pathParameters['name']!,
+          snaps: state.pathParameters['snaps']!,
+          following: state.pathParameters['following']!,
+          image: state.pathParameters['image']!,
+        ),
+      ),
+      GoRoute(
+        path: '/splash',
+        builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: '/onboarding',
+        builder: (context, state) => const OnboardingPage(),
+      ),
+    ],
+    redirect: (context, state) =>
+        computeRedirect(ref.read(authStateProvider), state.matchedLocation),
+  );
+}
