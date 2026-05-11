@@ -1,6 +1,12 @@
 import 'package:chat_app/core/services/chat_service.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart';
 
+/// Repository interface for chat operations.
+///
+/// Acts as an anti-corruption layer between the UI/controllers and the
+/// underlying [ChatService]. Currently delegates 1-to-1 to the service;
+/// this boundary exists to allow caching or offline logic without touching
+/// the rest of the app.
 abstract class ChatRepository {
   Stream<List<Room>> getRooms({bool orderByUpdatedAt = true});
   Stream<List<Message>> getMessages(Room room);
@@ -10,6 +16,7 @@ abstract class ChatRepository {
   Future<void> updateRoom(Room room);
 }
 
+/// Default implementation of [ChatRepository] backed by [ChatService].
 class ChatRepositoryImpl implements ChatRepository {
   final ChatService _chatService;
 

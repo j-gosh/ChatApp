@@ -4,6 +4,10 @@ import 'package:chat_app/models/user/user_video_creds.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart';
 
+/// Repository interface for user-profile and friends-list operations.
+///
+/// Mirrors [UserService] and exists as a boundary for future caching or
+/// offline support without modifying the service or UI layers.
 abstract class UserRepository {
   Future<UserProfile> getUserProfile(String userId);
   Future<void> saveUserProfile(String userId, String userName, String firstName, String lastName);
@@ -15,6 +19,7 @@ abstract class UserRepository {
   Future<QuerySnapshot<Map<String, dynamic>>> getPublicUsers();
 }
 
+/// Default implementation of [UserRepository] backed by [UserService].
 class UserRepositoryImpl implements UserRepository {
   final UserService _userService;
 
