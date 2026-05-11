@@ -1,33 +1,31 @@
 import 'package:chat_app/models/group/group_model.dart';
+import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-class UserProfile {
-  UserProfile(
-      {required this.userName,
-      required this.first,
-      required this.last,
-      required this.groups});
+part 'user_model.g.dart';
+
+/// Firestore profile document for a registered user.
+///
+/// Stored at `profileData/{uid}`. Serialized with `json_serializable`.
+@JsonSerializable()
+class UserProfile extends Equatable {
+  const UserProfile({
+    required this.userName,
+    required this.first,
+    required this.last,
+    required this.groups,
+  });
 
   final String userName;
   final String first;
   final String last;
-  final List groups;
+  final List<GroupModel> groups;
 
-  factory UserProfile.fromJson(Map<String, dynamic> json) {
-    var groupsFromJson = json['messages'] as List;
-    List groupList = groupsFromJson.map((i) => GroupModel.fromJson(i)).toList();
+  factory UserProfile.fromJson(Map<String, dynamic> json) =>
+      _$UserProfileFromJson(json);
 
-    return UserProfile(
-        userName: json['userName'],
-        first: json['first'],
-        last: json['last'],
-        groups: groupList);
-  }
-  Map<String, dynamic> toJson() {
-    return {
-      'userName': userName,
-      'first': first,
-      'last': last,
-      'groups': groups,
-    };
-  }
+  Map<String, dynamic> toJson() => _$UserProfileToJson(this);
+
+  @override
+  List<Object?> get props => [userName, first, last, groups];
 }
