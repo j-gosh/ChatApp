@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// Reusable card-wrapped list tile with a text leading widget.
+///
+/// Used wherever a simple tappable list row is needed throughout the app.
 class ListCardTile extends StatelessWidget {
   const ListCardTile(
       {super.key, required this.leadingData, required this.onTap});

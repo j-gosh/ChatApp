@@ -1,12 +1,18 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:chat_app/data/datasources/json/get_map_data.dart';
+import 'package:chat_app/data/datasources/get_map_data.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+/// Google Maps view showing the current user's location and friend markers.
+///
+/// On Android, requests location permission before fetching the device
+/// position. Friend markers are loaded from mock JSON via `GetMapData`.
+/// Location permission check is currently disabled in `initState` —
+/// uncomment `_checkPermissions()` there to re-enable it.
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
 
@@ -44,9 +50,8 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
-  _getFriendsMarkers() async {
+  Future<void> _getFriendsMarkers() async {
     final friendsList = await _json.readMapJson();
-    print(friendsList);
     for (final element in friendsList) {
       final pos = LatLng(
           element['location']['latitude'], element['location']['longitude']);

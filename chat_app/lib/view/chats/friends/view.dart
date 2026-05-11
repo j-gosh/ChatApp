@@ -1,9 +1,11 @@
-import 'package:chat_app/core/providers/ui_providers.dart';
+import 'package:chat_app/core/providers/ui/ui_providers.dart';
 import 'package:chat_app/view/chats/friends/active_users.dart';
 import 'package:chat_app/view/chats/friends/friends_list.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+/// Container that switches between [FriendsList] and [ActiveUsers] based on
+/// [friendsPageIndexProvider].
 class FriendsView extends ConsumerStatefulWidget {
   const FriendsView({super.key});
 

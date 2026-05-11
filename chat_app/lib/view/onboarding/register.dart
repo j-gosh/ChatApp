@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+/// New-account registration form shown as a modal bottom sheet.
+///
+/// Collects first name, last name, email, and password. On success creates
+/// a Firebase Auth user, Firestore profile, chat user, and video credentials,
+/// then navigates to `/`.
 class RegistrationPage extends ConsumerStatefulWidget {
   const RegistrationPage({super.key});
   @override

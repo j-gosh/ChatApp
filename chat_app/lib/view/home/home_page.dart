@@ -1,5 +1,4 @@
-import 'package:chat_app/core/providers/ui_providers.dart';
-import 'package:chat_app/utils/theme/app_theme.dart';
+import 'package:chat_app/core/providers/ui/ui_providers.dart';
 import 'package:chat_app/view/chats/chat_page.dart';
 import 'package:chat_app/view/discover/discover.dart';
 import 'package:chat_app/view/home/bottom_navbar.dart';
@@ -7,8 +6,12 @@ import 'package:chat_app/view/map/map_page.dart';
 import 'package:chat_app/view/video_chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:stream_video_flutter/stream_video_flutter.dart';
 
+/// Main shell screen rendered at `/`.
+///
+/// Uses an [IndexedStack] to keep all four tabs alive (Chat, Map, Video,
+/// Discover) while switching between them via [BottomNavbar]. The active tab
+/// index is driven by [navigationIndexProvider].
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 

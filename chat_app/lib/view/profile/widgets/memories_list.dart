@@ -1,7 +1,10 @@
-import 'package:chat_app/data/datasources/json/get_memories.dart';
+import 'package:chat_app/data/datasources/get_memories.dart';
 import 'package:chat_app/models/images/memories_model.dart';
 import 'package:flutter/material.dart';
 
+/// 3-column grid of saved photo memories on the profile page.
+///
+/// Images are loaded from `assets/json/memories.json` via [GetMemories].
 class MemoriesList extends StatefulWidget {
   const MemoriesList({super.key});
 
@@ -48,7 +51,7 @@ class _MemoriesListState extends State<MemoriesList> {
         } else if (snapshot.data == null ||
             snapshot.hasError ||
             snapshot.connectionState == ConnectionState.none) {
-          return Center(child: Text('errore'));
+          return const Center(child: Text('errore'));
         }
         return const CircularProgressIndicator();
       },

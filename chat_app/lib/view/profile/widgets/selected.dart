@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+/// Read-only profile view for another user, shown at
+/// `/selected/:name/:snaps/:following/:image`.
+///
+/// All data is passed as path parameters — no additional network requests
+/// are made when this screen opens.
 class SelectedProfile extends StatefulWidget {
   const SelectedProfile(
       {super.key,

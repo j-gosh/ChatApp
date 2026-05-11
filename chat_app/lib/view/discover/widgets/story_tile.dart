@@ -1,26 +1,18 @@
-import 'package:chat_app/data/datasources/json/get_chat_data.dart';
 import 'package:flutter/material.dart';
 
-class StoryTile extends StatefulWidget {
+/// Stories section of the Discover feed.
+///
+/// Currently shows a placeholder — story content is not yet implemented.
+class StoryTile extends StatelessWidget {
   const StoryTile({super.key});
 
   @override
-  State<StoryTile> createState() => _StoryTileState();
-}
-
-class _StoryTileState extends State<StoryTile> {
-  final GetChatData _getChatData = GetChatData();
-
-  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
+    return const Padding(
+      padding: EdgeInsets.all(4.0),
       child: Column(
-        //crossAxisAlignment: CrossAxisAlignment.start,
-        //   mainAxisAlignment: MainAxisAlignment.start,
-        //   mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
+          Text(
             'Stories',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
           ),

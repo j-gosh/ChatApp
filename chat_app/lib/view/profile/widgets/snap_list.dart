@@ -1,7 +1,11 @@
-import 'package:chat_app/data/datasources/json/get_memories.dart';
+import 'package:chat_app/data/datasources/get_memories.dart';
 import 'package:chat_app/models/images/memories_model.dart';
 import 'package:flutter/material.dart';
 
+/// 3-column grid of snaps shown on the profile page's Snaps tab.
+///
+/// Currently reuses memories data from [GetMemories] as a placeholder
+/// until real snap data is available.
 class SnapList extends StatefulWidget {
   const SnapList({super.key});
 
@@ -10,7 +14,7 @@ class SnapList extends StatefulWidget {
 }
 
 class _SnapListState extends State<SnapList> {
-  GetMemories _getMemories = GetMemories();
+  final GetMemories _getMemories = GetMemories();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -35,7 +39,7 @@ class _SnapListState extends State<SnapList> {
                   height: 150,
                   width: 200,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Color(0xff000000)),
+                    border: Border.all(color: const Color(0xff000000)),
                     borderRadius: BorderRadius.circular(6.0),
                     image: DecorationImage(
                       image: Image.asset(memories.url).image,
@@ -48,7 +52,7 @@ class _SnapListState extends State<SnapList> {
         } else if (snapshot.data == null ||
             snapshot.hasError ||
             snapshot.connectionState == ConnectionState.none) {
-          return Center(child: Text('errore'));
+          return const Center(child: Text('errore'));
         }
         return const CircularProgressIndicator();
       },

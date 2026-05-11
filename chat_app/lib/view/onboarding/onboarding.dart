@@ -1,11 +1,12 @@
 import 'package:chat_app/view/onboarding/forgot_password.dart';
 import 'package:chat_app/view/onboarding/login.dart';
 import 'package:chat_app/view/onboarding/register.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+/// Landing page shown to unauthenticated users at `/onboarding`.
+///
+/// Presents three modal bottom sheets via buttons: Sign in, Register,
+/// and Forgot Password. GoRouter redirects here when auth state is null.
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 

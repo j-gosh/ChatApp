@@ -1,8 +1,13 @@
-import 'package:chat_app/data/datasources/json/get_profile_pic.dart';
+import 'package:chat_app/data/datasources/get_profile_pic.dart';
 import 'package:chat_app/models/images/profile_picture.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+/// Circular avatar widget shown in app-bar actions.
+///
+/// Loads the profile picture from `assets/json/profile_picture.json` and
+/// navigates to `/profile` when tapped. Falls back to a text button while
+/// loading or when no image is available.
 class ProfileAvatar extends StatefulWidget {
   const ProfileAvatar({super.key});
 
@@ -39,7 +44,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
             onPressed: () {
               context.push('/profile');
             },
-            child: Text('Profile'),
+            child: const Text('Profile'),
           );
         }
 

@@ -1,7 +1,11 @@
-import 'package:chat_app/data/datasources/json/get_articles.dart';
+import 'package:chat_app/data/datasources/get_articles.dart';
 import 'package:chat_app/models/news/news_model.dart';
 import 'package:flutter/material.dart';
 
+/// Horizontal grid of personalized news article cards in the Discover feed.
+///
+/// Loads articles from [GetArticles] and displays the first five as image cards
+/// with a title overlay gradient.
 class ForYouTile extends StatefulWidget {
   const ForYouTile({super.key});
 
@@ -64,7 +68,7 @@ class _ForYouTileState extends State<ForYouTile> {
                                     image: Image.asset(news.thumbnail).image,
                                     // NetworkImage('')
                                   ),
-                                  borderRadius: BorderRadius.all(
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(8.0),
                                   ),
                                   color: Colors.white,
@@ -106,7 +110,7 @@ class _ForYouTileState extends State<ForYouTile> {
           );
         } else if (snapshot.data == null ||
             snapshot.connectionState == ConnectionState.none) {
-          return Text('error');
+          return const Text('error');
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         }

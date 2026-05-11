@@ -2,8 +2,11 @@ import 'package:chat_app/widgets/buttons/fab/expandable_comp.dart';
 import 'package:chat_app/utils/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-///  floating expandable action button code
-//TODO: find a way to close button on navigation and button press
+/// Expandable floating action button that fans [children] out in a 90° arc.
+///
+/// Tap the menu icon to expand; tap the close icon to collapse. Each child
+/// is an [ExpandingActionButton] animated with [distance] as the max radius.
+// TODO: close automatically on navigation or child button press
 class ActionButton extends StatefulWidget {
   const ActionButton(
       {super.key,
@@ -11,8 +14,13 @@ class ActionButton extends StatefulWidget {
       required this.distance,
       required this.children});
 
+  /// Whether the FAB starts in the expanded state. Defaults to false.
   final bool? initialOpen;
+
+  /// Maximum distance (in logical pixels) each child travels from the origin.
   final double distance;
+
+  /// Action buttons revealed when the FAB expands.
   final List<Widget> children;
 
   @override

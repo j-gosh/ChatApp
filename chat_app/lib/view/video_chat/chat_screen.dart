@@ -1,8 +1,10 @@
-import 'package:chat_app/core/providers/auth_providers.dart';
-import 'package:chat_app/core/providers/service_providers.dart';
-import 'package:chat_app/core/providers/user_providers.dart';
-import 'package:chat_app/core/providers/video_providers.dart';
+import 'package:chat_app/core/providers/service/service_providers.dart';
+import 'package:chat_app/core/providers/user/user_providers.dart';
+import 'package:chat_app/core/providers/video/video_providers.dart';
+import 'package:chat_app/core/services/video_service.dart';
+import 'package:chat_app/models/user/user_model.dart';
 import 'package:chat_app/utils/theme/app_theme.dart';
+import 'package:chat_app/view/chats/friends/friends_list.dart';
 import 'package:chat_app/view/video_chat/call_container.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stream_video_flutter/stream_video_flutter.dart';
 
+/// Video calling screen shown at nav index 2.
+///
+/// On first load checks camera and microphone permissions. Initializes the
+/// Stream Video SDK using the current user's stored credentials, then shows
+/// a "Make a video call" button that opens a friend-picker dialog.
 class VideoChatScreen extends ConsumerStatefulWidget {
   const VideoChatScreen({super.key});
 
@@ -74,10 +81,10 @@ class _VideoChatScreenState extends ConsumerState<VideoChatScreen> {
   }
 
   Future showMakeCallDialog(
-    List<QueryDocumentSnapshot> docs,
+    List<UserProfile?> friends,
     String userVideoId,
-  ) {
-    Map<String, dynamic> friends = docs as Map<String, dynamic>;
+  ) async{
+
     String id = '';
     return showDialog(
       context: context,
@@ -93,10 +100,11 @@ class _VideoChatScreenState extends ConsumerState<VideoChatScreen> {
                 ListView.builder(
                   itemCount: friends.length,
                   itemBuilder: (context, index) {
+                    final friend = friends[index];
                     return ListTile(
-                      leading: Text('${friends['first']} ${friends['last']}'),
+                      leading: Text('${friend?.first} ${friend?.last}'),
                       onTap: () {
-                        id = friends['id'][index];
+                        id = friend!.userName;
                       },
                     );
                   },
@@ -145,14 +153,20 @@ class _VideoChatScreenState extends ConsumerState<VideoChatScreen> {
   Widget build(BuildContext context) {
     final userId = ref.watch(authServiceProvider).currentUserId;
     final friendsList = ref
-        .watch(userServiceProvider)
-        .getUserFriendsStream(userId!);
+        .watch(userFriendsListProvider(userId!));
     final videoCallCredentials = ref.watch(videoCredentialsProvider(userId));
 
     return videoCallCredentials.when(
       data: (data) {
         if (data.userInfo.id.isNotEmpty) {
-          _initStreamVideo(data.userInfo.id, data.userToken.userId);
+
+          _initStreamVideo(data.userInfo.id, data.userToken.userId, apiKey);
+          
+          final friend = friendsList.whenData((value) {
+              return value;
+
+          },).value;
+
           return Scaffold(
             appBar: AppBar(title: const Text('')),
             body: SafeArea(child: CallContainer(call: _call!)),
@@ -201,7 +215,7 @@ class _VideoChatScreenState extends ConsumerState<VideoChatScreen> {
                       ),
                     ),
                     onTap: () {
-                      showMakeCallDialog();
+                      showMakeCallDialog(friend!, data.userInfo.id);
                     },
                   ),
           );

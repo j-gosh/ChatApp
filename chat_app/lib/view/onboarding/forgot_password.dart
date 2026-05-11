@@ -2,6 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+/// Password-reset form shown as a modal bottom sheet.
+///
+/// Sends a Firebase password-reset email to the supplied address.
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({super.key});
 

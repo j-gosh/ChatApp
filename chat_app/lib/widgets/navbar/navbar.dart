@@ -1,6 +1,10 @@
 import 'package:chat_app/utils/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
+/// Thin wrapper around [BottomNavigationBar] that applies the app theme colors.
+///
+/// Accepts [items], [currentIndex], and [onTap] so the parent widget controls
+/// all state — this widget is purely presentational.
 class NavBar extends StatelessWidget {
   const NavBar(
       {super.key,

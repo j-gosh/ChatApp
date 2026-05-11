@@ -1,11 +1,14 @@
-import 'package:chat_app/core/providers/chat_providers.dart';
-import 'package:chat_app/core/providers/service_providers.dart';
+import 'package:chat_app/core/providers/chat/chat_providers.dart';
+import 'package:chat_app/core/providers/service/service_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:uuid/uuid.dart';
 
+/// Lists all users registered in the chat system (via FirebaseChatCore).
+///
+/// Tapping a user creates a chat room, adds them to the current user's friends
+/// list, sets [selectedRoomProvider], and navigates to `/messages`.
 class ActiveUsers extends ConsumerStatefulWidget {
   const ActiveUsers({super.key});
 
@@ -16,15 +19,12 @@ class ActiveUsers extends ConsumerStatefulWidget {
 }
 
 class _ActiveUsersState extends ConsumerState<ActiveUsers> {
-  final Uuid _uuid = const Uuid();
-
   @override
   Widget build(BuildContext context) {
     final availableUsers = ref.watch(availableUsersProvider);
     final auth = ref.watch(authServiceProvider);
     final chatService = ref.watch(chatServiceProvider);
     final userService = ref.watch(userServiceProvider);
-    final room = ref.watch(selectedRoomProvider);
     return availableUsers.when(
       data: (data) {
         return SizedBox(
@@ -38,10 +38,9 @@ class _ActiveUsersState extends ConsumerState<ActiveUsers> {
                 child: ListTile(
                   leading: Text('${user.firstName} ${user.lastName}'),
                   onTap: () {
-                    print(user);
-                    ref.read(selectedRoomProvider.notifier).state = Room(
+                    ref.read(selectedRoomProvider.notifier).select(Room(
                       imageUrl: user.imageUrl,
-                      lastMessages: [],
+                      lastMessages: const [],
                       createdAt: DateTime.now().millisecondsSinceEpoch,
                       updatedAt: DateTime.now().millisecondsSinceEpoch,
                       metadata: user.metadata,
@@ -52,7 +51,7 @@ class _ActiveUsersState extends ConsumerState<ActiveUsers> {
                         User(id: auth.currentUser!.uid),
                         User(id: user.id),
                       ],
-                    );
+                    ));
                     chatService.createRoom(
                       User(
                         id: user.id,
@@ -81,10 +80,10 @@ class _ActiveUsersState extends ConsumerState<ActiveUsers> {
         );
       },
       error: (error, stackTrace) {
-        return Text('active user error');
+        return const Text('active user error');
       },
       loading: () {
-        return SizedBox(
+        return const SizedBox(
           height: 150,
           width: 150,
           child: Center(child: CircularProgressIndicator.adaptive()),

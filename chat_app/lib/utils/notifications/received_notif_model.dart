@@ -1,3 +1,4 @@
+/// Payload for a push notification received while the app is in the foreground.
 class ReceivedNotification {
   ReceivedNotification(
       {required this.id,

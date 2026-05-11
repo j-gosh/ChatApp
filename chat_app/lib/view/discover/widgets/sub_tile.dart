@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// Horizontal subscriptions carousel in the Discover feed.
+///
+/// Shows five fixed-width cards with a gradient label overlay.
+/// Content is currently static — replace with real subscription data when ready.
 class SubTile extends StatefulWidget {
   const SubTile({super.key});
 
@@ -51,7 +55,7 @@ class _SubTileState extends State<SubTile> {
                                   //NetworkImage('')
                                   ),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(8.0)),
+                                  const BorderRadius.all(Radius.circular(8.0)),
                               color: Colors.white,
                             ),
                           ),

@@ -1,6 +1,8 @@
 import 'package:chat_app/utils/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
+/// A circular icon button with a text label underneath, styled for use as an
+/// expanding FAB child action.
 class FABIcon extends StatelessWidget {
   const FABIcon(
       {super.key,

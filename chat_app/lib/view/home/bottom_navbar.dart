@@ -1,8 +1,12 @@
-import 'package:chat_app/core/providers/ui_providers.dart';
+import 'package:chat_app/core/providers/ui/ui_providers.dart';
 import 'package:chat_app/widgets/navbar/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+/// Bottom navigation bar for the main shell.
+///
+/// Renders four tabs (Chat, Map, Video, Discover) and syncs the selected tab
+/// with [navigationIndexProvider].
 class BottomNavbar extends ConsumerStatefulWidget {
   const BottomNavbar({super.key});
 
@@ -25,7 +29,7 @@ class _BottomNavbarState extends ConsumerState<BottomNavbar> {
       ],
       currentIndex: currentIndex,
       onTap: (value) {
-        ref.read(navigationIndexProvider.notifier).state = value;
+        ref.read(navigationIndexProvider.notifier).setIndex(value);
       },
     );
   }

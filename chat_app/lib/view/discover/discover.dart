@@ -4,6 +4,12 @@ import 'package:chat_app/view/discover/widgets/sub_tile.dart';
 import 'package:chat_app/view/profile/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 
+/// Discover feed shown at `/discover` and nav index 3.
+///
+/// Contains three sections stacked vertically:
+/// - [SubTile]: horizontal subscriptions carousel
+/// - [ForYouTile]: personalized news articles grid
+/// - [StoryTile]: friends' stories (placeholder)
 class DiscoverPage extends StatefulWidget {
   const DiscoverPage({super.key});
 

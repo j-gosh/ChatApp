@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// Centered adaptive loading spinner sized at 150×150.
+///
+/// Drop-in replacement for any full-screen loading state.
 class LoadingAnimation extends StatelessWidget {
   const LoadingAnimation({super.key});
 

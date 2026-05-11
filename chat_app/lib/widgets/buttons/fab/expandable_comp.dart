@@ -2,6 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+/// A single child button that animates outward from the FAB origin.
+///
+/// Used internally by the expandable FAB. [directionInDegrees] sets the angle
+/// (0° = right, 90° = down), and [progress] drives the expand/collapse
+/// animation from 0.0 to 1.0.
 @immutable
 class ExpandingActionButton extends StatelessWidget {
   const ExpandingActionButton({

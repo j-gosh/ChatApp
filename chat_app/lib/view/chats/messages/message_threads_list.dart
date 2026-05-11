@@ -1,9 +1,13 @@
-import 'package:chat_app/core/providers/chat_providers.dart';
+import 'package:chat_app/core/providers/chat/chat_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+/// Scrollable list of all existing chat rooms for the current user.
+///
+/// Tapping a room sets [selectedRoomProvider] and pushes `/messages`.
+/// Shows an empty-state message when there are no conversations yet.
 class MessageThreadsList extends ConsumerStatefulWidget {
   const MessageThreadsList({super.key});
 
@@ -27,11 +31,11 @@ class _MessageThreadsListState extends ConsumerState<MessageThreadsList> {
                 child: ListTile(
                   leading: Text('${data[index].name}'),
                   onTap: () {
-                    ref.read(selectedRoomProvider.notifier).state = Room(
+                    ref.read(selectedRoomProvider.notifier).select(Room(
                       id: data[index].id,
                       type: data[index].type,
                       users: data[index].users,
-                    );
+                    ));
 
                     context.push('/messages');
                   },
@@ -47,8 +51,6 @@ class _MessageThreadsListState extends ConsumerState<MessageThreadsList> {
         }
       },
       error: (error, stackTrace) {
-        print(error);
-        print(stackTrace);
         return Text('error $error');
       },
       loading: () {

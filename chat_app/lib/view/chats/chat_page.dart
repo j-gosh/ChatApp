@@ -1,14 +1,15 @@
-import 'package:chat_app/core/providers/ui_providers.dart';
+import 'package:chat_app/core/providers/ui/ui_providers.dart';
 import 'package:chat_app/view/chats/friends/view.dart';
 import 'package:chat_app/view/chats/messages/message_threads_list.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:chat_app/view/profile/widgets/avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:chat_app/core/providers/ui_providers.dart';
 
+/// Top-level chat tab rendered at index 0 of the bottom nav.
+///
+/// Shows two sub-views toggled by [chatPageIndexProvider]:
+/// - 0: [MessageThreadsList] — existing conversations
+/// - 1: [FriendsView] — friends list and active users for starting new chats
 class ChatPage extends ConsumerStatefulWidget {
   const ChatPage({super.key});
 
@@ -32,19 +33,19 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        ref.read(chatPageIndexProvider.notifier).state = 0;
+                        ref.read(chatPageIndexProvider.notifier).setIndex(0);
                       },
                       child: const Text('Chats'),
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        ref.read(friendsPageIndexProvider.notifier).state = 0;
+                        ref.read(friendsPageIndexProvider.notifier).setIndex(0);
                       },
                       child: const Text('Friends'),
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        ref.read(friendsPageIndexProvider.notifier).state = 1;
+                        ref.read(friendsPageIndexProvider.notifier).setIndex(1);
                       },
                       child: const Text('Active Users'),
                     ),
@@ -55,13 +56,13 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                   children: [
                     ElevatedButton(
                       onPressed: () async {
-                        ref.read(chatPageIndexProvider.notifier).state = 0;
+                        ref.read(chatPageIndexProvider.notifier).setIndex(0);
                       },
                       child: const Text('Chats'),
                     ),
                     ElevatedButton.icon(
                       onPressed: () {
-                        ref.read(chatPageIndexProvider.notifier).state = 1;
+                        ref.read(chatPageIndexProvider.notifier).setIndex(1);
                       },
                       label: const Text('New'),
                       icon: const Icon(Icons.add),

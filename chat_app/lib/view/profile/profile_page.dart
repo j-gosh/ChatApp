@@ -5,9 +5,13 @@ import 'package:chat_app/view/profile/widgets/stories_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+/// Current user's profile screen at `/profile`.
+///
+/// Displays avatar, username, snap/friends/following counts, and a tabbed
+/// content grid that switches between Snaps, Stories, and Memories via
+/// [DataType]. The settings icon signs the user out.
 class ProfilePage extends StatefulHookConsumerWidget {
   const ProfilePage({super.key});
 

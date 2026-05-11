@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// Simple in-call text chat panel used alongside a video call.
+///
+/// Maintains an in-memory list of messages; no persistence or real-time sync.
 class ChatSection extends StatefulWidget {
   const ChatSection({super.key});
 
@@ -39,7 +42,7 @@ class _ChatSectionState extends State<ChatSection> {
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Colors.blueAccent.withOpacity(0.2),
+                      color: Colors.blueAccent.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(_messages[index]),

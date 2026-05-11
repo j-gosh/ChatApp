@@ -5,6 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:video_player/video_player.dart';
 
+/// Full-featured camera screen accessible at `/camera`.
+///
+/// Supports photo capture, video recording, flash control, exposure/focus
+/// mode selection, pinch-to-zoom, and front/back camera switching.
+/// Implements [WidgetsBindingObserver] to release the camera when the app
+/// goes to the background and reinitialize it on resume.
 class CameraDisplay extends StatefulWidget {
   const CameraDisplay({super.key});
 

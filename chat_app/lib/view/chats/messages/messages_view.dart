@@ -1,5 +1,5 @@
-import 'package:chat_app/core/providers/auth_providers.dart';
-import 'package:chat_app/core/providers/chat_providers.dart';
+import 'package:chat_app/core/providers/auth/auth_providers.dart';
+import 'package:chat_app/core/providers/chat/chat_providers.dart';
 import 'package:chat_app/core/controllers/chat_controller.dart';
 import 'package:chat_app/utils/loading_animation.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +7,11 @@ import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+/// Full-screen chat UI for a single conversation room.
+///
+/// Requires [selectedRoomProvider] to be set before navigating here.
+/// Renders the `flutter_chat_ui` [Chat] widget which handles message rendering
+/// and the send bar. Messages stream live via [chatMessagesProvider].
 class MessagesView extends ConsumerStatefulWidget {
   const MessagesView({super.key});
 
@@ -30,12 +35,11 @@ class _MessagesViewState extends ConsumerState<MessagesView> {
     
     final chatUser = types.User(id: currentUser.uid);
     final groupThreadMessages = ref.watch(chatMessagesProvider(room));
-    print('Room: $room');
     return groupThreadMessages.when(data: (data) {
       if (data.isNotEmpty) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(''),
+            title: const Text(''),
           ),
           body: Chat(
             user: chatUser,
