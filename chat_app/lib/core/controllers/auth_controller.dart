@@ -1,16 +1,29 @@
-import 'package:chat_app/core/providers/service_providers.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:chat_app/core/providers/service/service_providers.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+part 'auth_controller.g.dart';
+
+/// Handles all authentication-related business logic.
+///
+/// Consumed by UI widgets via [authControllerProvider]. Delegates the actual
+/// Firebase calls to the auth, user, and video services so the UI layer stays
+/// free of SDK-specific code.
 class AuthController {
   final Ref ref;
 
   AuthController(this.ref);
 
+  /// Signs the user in with [email] and [password] via Firebase Auth.
   Future<void> signIn(String email, String password) async {
     final authService = ref.read(authServiceProvider);
     await authService.signInWithEmailAndPassword(email, password);
   }
 
+  /// Creates a new account and sets up all required user data in parallel:
+  /// - Firebase Auth user
+  /// - Chat user record (via FirebaseChatCore)
+  /// - Firestore profile document
+  /// - Stream Video credentials
   Future<void> signUp({
     required String email,
     required String password,
@@ -22,13 +35,12 @@ class AuthController {
     final userService = ref.read(userServiceProvider);
     final videoService = ref.read(videoServiceProvider);
 
-    final userCredential = await authService.createUserWithEmailAndPassword(email, password);
+    final userCredential =
+        await authService.createUserWithEmailAndPassword(email, password);
     final userId = userCredential.user!.uid;
 
-    // Generate video credentials
     final videoCredentials = videoService.generateVideoCredentials(userId);
 
-    // Save all user data
     await Future.wait([
       videoService.saveUserVideoCredentials(userId, videoCredentials),
       authService.createChatUser(firstName, lastName),
@@ -37,12 +49,12 @@ class AuthController {
     ]);
   }
 
+  /// Signs the current user out of Firebase Auth.
   Future<void> signOut() async {
     final authService = ref.read(authServiceProvider);
     await authService.signOut();
   }
 }
 
-final authControllerProvider = Provider<AuthController>((ref) {
-  return AuthController(ref);
-});
+@Riverpod(keepAlive: true)
+AuthController authController(Ref ref) => AuthController(ref);
