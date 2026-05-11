@@ -3,3 +3,4 @@ chat_app/lib/firebase_options.dart
 chat_app_w_stream_video/chat_app/lib/models/stream_api/credentials.dart
 chat_app/lib/utils/stream_video_credentials.dart
 CLAUDE.md
+**/.DS_Store
