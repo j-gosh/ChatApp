@@ -236,7 +236,7 @@ abstract class _$SelectedRoom extends $Notifier<Room?> {
   Room? build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<Room?, Room?>;
     final element =
         ref.element
@@ -246,6 +246,6 @@ abstract class _$SelectedRoom extends $Notifier<Room?> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }
