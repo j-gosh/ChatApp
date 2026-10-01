@@ -13,6 +13,7 @@ Future<void> main() async {
 
   GoogleMapsFlutterPlatform mapsFlutterPlatform =
       GoogleMapsFlutterPlatform.instance;
+
   if (mapsFlutterPlatform is GoogleMapsFlutterAndroid) {
     mapsFlutterPlatform.useAndroidViewSurface = true;
     _initializeMapRenderer();
