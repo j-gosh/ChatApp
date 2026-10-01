@@ -27,6 +27,7 @@ void main() {
 
     test('Equatable inequality for different values', () {
       final a = Memories.fromJson(json);
+      // ignore: prefer_const_literals_to_create_immutables
       final b = Memories.fromJson({...json, 'url': 'other.jpg'});
       expect(a, isNot(equals(b)));
     });

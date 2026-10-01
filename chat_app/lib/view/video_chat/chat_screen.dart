@@ -1,12 +1,9 @@
 import 'package:chat_app/core/providers/service/service_providers.dart';
-import 'package:chat_app/core/providers/user/user_providers.dart';
 import 'package:chat_app/core/providers/video/video_providers.dart';
 import 'package:chat_app/core/services/video_service.dart';
 import 'package:chat_app/models/user/user_model.dart';
 import 'package:chat_app/utils/theme/app_theme.dart';
-import 'package:chat_app/view/chats/friends/friends_list.dart';
 import 'package:chat_app/view/video_chat/call_container.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -27,11 +24,9 @@ class VideoChatScreen extends ConsumerStatefulWidget {
 }
 
 class _VideoChatScreenState extends ConsumerState<VideoChatScreen> {
-  String? _key;
-
   Call? _call;
 
-  bool _inCall = false;
+  final bool _inCall = false;
 
   Future _showPermissionsDialog() {
     return showDialog(
@@ -84,7 +79,6 @@ class _VideoChatScreenState extends ConsumerState<VideoChatScreen> {
     List<UserProfile?> friends,
     String userVideoId,
   ) async {
-    String id = '';
     return showDialog(
       context: context,
       builder: (context) {
@@ -102,9 +96,7 @@ class _VideoChatScreenState extends ConsumerState<VideoChatScreen> {
                     final friend = friends[index];
                     return ListTile(
                       leading: Text('${friend?.first} ${friend?.last}'),
-                      onTap: () {
-                        id = friend!.userName;
-                      },
+                      onTap: () {},
                     );
                   },
                 ),
@@ -248,7 +240,7 @@ class _VideoChatScreenState extends ConsumerState<VideoChatScreen> {
         }
       },
       error: (error, stackTrace) {
-        return Text('error');
+        return const Text('error');
       },
       loading: () {
         return const Center(child: CircularProgressIndicator.adaptive());

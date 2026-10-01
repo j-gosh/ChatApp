@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:chat_app/models/news/news_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 

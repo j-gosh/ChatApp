@@ -44,8 +44,9 @@ class StreamVideoService implements VideoService {
         .doc(userId)
         .get();
     final data = doc.data();
-    if (data == null)
+    if (data == null) {
       throw Exception('Video credentials not found for user: $userId');
+    }
     return UserVideoCredentials.fromJson(data);
   }
 
