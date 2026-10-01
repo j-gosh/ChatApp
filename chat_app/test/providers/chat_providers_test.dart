@@ -16,8 +16,10 @@ void main() {
   group('chatRoomsProvider', () {
     test('emits room list from chatService.getRooms()', () async {
       const testRoom = Room(id: 'r-1', type: RoomType.direct, users: []);
-      when(() => mockChat.getRooms(orderByUpdatedAt: any(named: 'orderByUpdatedAt')))
-          .thenAnswer((_) => Stream.value([testRoom]));
+      when(
+        () =>
+            mockChat.getRooms(orderByUpdatedAt: any(named: 'orderByUpdatedAt')),
+      ).thenAnswer((_) => Stream.value([testRoom]));
 
       final container = makeContainer(chatService: mockChat);
       addTearDown(container.dispose);
@@ -27,8 +29,10 @@ void main() {
     });
 
     test('emits error when service throws', () async {
-      when(() => mockChat.getRooms(orderByUpdatedAt: any(named: 'orderByUpdatedAt')))
-          .thenAnswer((_) => Stream.error(Exception('network error')));
+      when(
+        () =>
+            mockChat.getRooms(orderByUpdatedAt: any(named: 'orderByUpdatedAt')),
+      ).thenAnswer((_) => Stream.error(Exception('network error')));
 
       final container = makeContainer(chatService: mockChat);
       addTearDown(container.dispose);
@@ -48,14 +52,16 @@ void main() {
         author: User(id: 'uid-1'),
         text: 'Hello',
       );
-      when(() => mockChat.getMessages(testRoom))
-          .thenAnswer((_) => Stream.value([testMessage]));
+      when(
+        () => mockChat.getMessages(testRoom),
+      ).thenAnswer((_) => Stream.value([testMessage]));
 
       final container = makeContainer(chatService: mockChat);
       addTearDown(container.dispose);
 
-      final messages =
-          await container.read(chatMessagesProvider(testRoom).future);
+      final messages = await container.read(
+        chatMessagesProvider(testRoom).future,
+      );
       expect(messages, [testMessage]);
     });
   });
@@ -63,8 +69,9 @@ void main() {
   group('availableUsersProvider', () {
     test('emits user list from chatService.getUsers()', () async {
       const testUser = User(id: 'uid-1');
-      when(() => mockChat.getUsers())
-          .thenAnswer((_) => Stream.value([testUser]));
+      when(
+        () => mockChat.getUsers(),
+      ).thenAnswer((_) => Stream.value([testUser]));
 
       final container = makeContainer(chatService: mockChat);
       addTearDown(container.dispose);

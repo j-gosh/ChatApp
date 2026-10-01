@@ -20,8 +20,9 @@ void main() {
 
   group('authStateProvider', () {
     test('emits AsyncData(user) when service stream emits a user', () async {
-      when(() => mockAuth.authStateChanges)
-          .thenAnswer((_) => Stream.value(mockUser));
+      when(
+        () => mockAuth.authStateChanges,
+      ).thenAnswer((_) => Stream.value(mockUser));
 
       final container = makeContainer(authService: mockAuth);
       addTearDown(container.dispose);
@@ -31,8 +32,9 @@ void main() {
     });
 
     test('emits AsyncData(null) when user is signed out', () async {
-      when(() => mockAuth.authStateChanges)
-          .thenAnswer((_) => Stream.value(null));
+      when(
+        () => mockAuth.authStateChanges,
+      ).thenAnswer((_) => Stream.value(null));
 
       final container = makeContainer(authService: mockAuth);
       addTearDown(container.dispose);

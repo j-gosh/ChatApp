@@ -4,7 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('ProfilePicture', () {
     test('fromJson parses image field', () {
-      final pic = ProfilePicture.fromJson({'image': 'https://example.com/pic.jpg'});
+      final pic = ProfilePicture.fromJson({
+        'image': 'https://example.com/pic.jpg',
+      });
       expect(pic.image, 'https://example.com/pic.jpg');
     });
 

@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 ///
 /// Used wherever a simple tappable list row is needed throughout the app.
 class ListCardTile extends StatelessWidget {
-  const ListCardTile(
-      {super.key, required this.leadingData, required this.onTap});
+  const ListCardTile({
+    super.key,
+    required this.leadingData,
+    required this.onTap,
+  });
 
   final String leadingData;
   final void Function() onTap;

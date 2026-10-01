@@ -8,11 +8,12 @@ import 'package:flutter/material.dart';
 /// is an [ExpandingActionButton] animated with [distance] as the max radius.
 // TODO: close automatically on navigation or child button press
 class ActionButton extends StatefulWidget {
-  const ActionButton(
-      {super.key,
-      this.initialOpen,
-      required this.distance,
-      required this.children});
+  const ActionButton({
+    super.key,
+    this.initialOpen,
+    required this.distance,
+    required this.children,
+  });
 
   /// Whether the FAB starts in the expanded state. Defaults to false.
   final bool? initialOpen;
@@ -38,13 +39,15 @@ class _ActionButtonState extends State<ActionButton>
     super.initState();
     open = widget.initialOpen ?? false;
     animationController = AnimationController(
-        vsync: this,
-        value: open ? 1.0 : 0.0,
-        duration: const Duration(milliseconds: 250));
+      vsync: this,
+      value: open ? 1.0 : 0.0,
+      duration: const Duration(milliseconds: 250),
+    );
     expandAnimation = CurvedAnimation(
-        parent: animationController,
-        curve: Curves.linearToEaseOut,
-        reverseCurve: Curves.easeInToLinear);
+      parent: animationController,
+      curve: Curves.linearToEaseOut,
+      reverseCurve: Curves.easeInToLinear,
+    );
   }
 
   @override
@@ -72,11 +75,7 @@ class _ActionButtonState extends State<ActionButton>
         child: Stack(
           alignment: Alignment.bottomRight,
           clipBehavior: Clip.none,
-          children: [
-            tapToClose(),
-            ...expandingActionButtons(),
-            tapToOpen(),
-          ],
+          children: [tapToClose(), ...expandingActionButtons(), tapToOpen()],
         ),
       ),
     );
@@ -96,11 +95,7 @@ class _ActionButtonState extends State<ActionButton>
             onTap: toggle,
             child: const Padding(
               padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.close,
-                size: 28,
-                color: Colors.black,
-              ),
+              child: Icon(Icons.close, size: 28, color: Colors.black),
             ),
           ),
         ),
@@ -112,14 +107,19 @@ class _ActionButtonState extends State<ActionButton>
     final children = <Widget>[];
     final count = widget.children.length;
     final step = 90 / (count - 1);
-    for (var i = 0, angleInDegrees = 0.0;
-        i < count;
-        i++, angleInDegrees += step) {
-      children.add(ExpandingActionButton(
+    for (
+      var i = 0, angleInDegrees = 0.0;
+      i < count;
+      i++, angleInDegrees += step
+    ) {
+      children.add(
+        ExpandingActionButton(
           directionInDegrees: angleInDegrees,
           maxDistance: widget.distance,
           progress: expandAnimation,
-          child: widget.children[i]));
+          child: widget.children[i],
+        ),
+      );
     }
     return children;
   }
@@ -134,8 +134,11 @@ class _ActionButtonState extends State<ActionButton>
           width: 58.0,
           height: 58.0,
           transformAlignment: Alignment.bottomRight,
-          transform:
-              Matrix4.diagonal3Values(open ? 0.7 : 1.0, open ? 0.7 : 1.0, 1.0),
+          transform: Matrix4.diagonal3Values(
+            open ? 0.7 : 1.0,
+            open ? 0.7 : 1.0,
+            1.0,
+          ),
           duration: const Duration(milliseconds: 250),
           curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
           child: AnimatedOpacity(
@@ -145,11 +148,7 @@ class _ActionButtonState extends State<ActionButton>
             child: FloatingActionButton(
               onPressed: toggle,
               backgroundColor: AppTheme.appTheme.primaryColor,
-              child: const Icon(
-                Icons.menu,
-                size: 32,
-                color: Colors.white,
-              ),
+              child: const Icon(Icons.menu, size: 32, color: Colors.white),
             ),
           ),
         ),

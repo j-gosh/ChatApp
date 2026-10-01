@@ -20,20 +20,22 @@ void main() {
       expect(profile.groups, isEmpty);
     });
 
-    test('fromJson reads "groups" key — regression for bug reading "messages"',
-        () {
-      final json = {
-        'userName': 'x',
-        'first': 'A',
-        'last': 'B',
-        'groups': [
-          {'createdBy': 'uid-1', 'groupId': 'g-1', 'members': []},
-        ],
-      };
-      final profile = UserProfile.fromJson(json);
-      expect(profile.groups.length, 1);
-      expect(profile.groups.first.groupId, 'g-1');
-    });
+    test(
+      'fromJson reads "groups" key — regression for bug reading "messages"',
+      () {
+        final json = {
+          'userName': 'x',
+          'first': 'A',
+          'last': 'B',
+          'groups': [
+            {'createdBy': 'uid-1', 'groupId': 'g-1', 'members': []},
+          ],
+        };
+        final profile = UserProfile.fromJson(json);
+        expect(profile.groups.length, 1);
+        expect(profile.groups.first.groupId, 'g-1');
+      },
+    );
 
     test('fromJson does NOT read from "messages" key', () {
       // A JSON with only "messages" key (old bug) should give empty groups
@@ -62,10 +64,8 @@ void main() {
     });
 
     test('Equatable equality holds for identical values', () {
-      const a =
-          UserProfile(userName: 'x', first: 'A', last: 'B', groups: []);
-      const b =
-          UserProfile(userName: 'x', first: 'A', last: 'B', groups: []);
+      const a = UserProfile(userName: 'x', first: 'A', last: 'B', groups: []);
+      const b = UserProfile(userName: 'x', first: 'A', last: 'B', groups: []);
       expect(a, equals(b));
     });
 

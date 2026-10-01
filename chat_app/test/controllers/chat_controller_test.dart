@@ -40,8 +40,7 @@ void main() {
   group('ChatController.sendMessage', () {
     test('delegates to chatService.sendMessage', () async {
       const message = PartialText(text: 'Hello');
-      when(() => mockChat.sendMessage(any(), any()))
-          .thenAnswer((_) async {});
+      when(() => mockChat.sendMessage(any(), any())).thenAnswer((_) async {});
 
       await makeController().sendMessage(message, 'room-1');
 
@@ -53,8 +52,9 @@ void main() {
     test('delegates to chatService.createRoom and returns Room', () async {
       const otherUser = User(id: 'uid-2');
       const expectedRoom = Room(id: 'r-1', type: RoomType.direct, users: []);
-      when(() => mockChat.createRoom(any()))
-          .thenAnswer((_) async => expectedRoom);
+      when(
+        () => mockChat.createRoom(any()),
+      ).thenAnswer((_) async => expectedRoom);
 
       final room = await makeController().createRoom(otherUser);
 
@@ -77,8 +77,9 @@ void main() {
   group('ChatController.addFriend', () {
     test('delegates to userService.addUserToFriendsList', () async {
       const friend = User(id: 'uid-2');
-      when(() => mockUser.addUserToFriendsList(any(), any()))
-          .thenAnswer((_) async {});
+      when(
+        () => mockUser.addUserToFriendsList(any(), any()),
+      ).thenAnswer((_) async {});
 
       await makeController().addFriend('uid-1', friend);
 

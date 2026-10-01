@@ -22,40 +22,37 @@ Widget buildTestable({required AsyncValue<List<Room>> rooms}) {
 
 void main() {
   group('MessageThreadsList', () {
-    testWidgets('shows loading indicator while provider is loading',
-        (tester) async {
+    testWidgets('shows loading indicator while provider is loading', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
             chatRoomsProvider.overrideWith((ref) => const Stream.empty()),
           ],
-          child: const MaterialApp(
-            home: Scaffold(body: MessageThreadsList()),
-          ),
+          child: const MaterialApp(home: Scaffold(body: MessageThreadsList())),
         ),
       );
       // Before stream emits, the provider is in loading state
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
 
-    testWidgets('shows "You have no messages." when room list is empty',
-        (tester) async {
-      await tester.pumpWidget(buildTestable(
-        rooms: const AsyncData([]),
-      ));
+    testWidgets('shows "You have no messages." when room list is empty', (
+      tester,
+    ) async {
+      await tester.pumpWidget(buildTestable(rooms: const AsyncData([])));
       await tester.pump(); // let stream deliver
       expect(find.text('You have no messages.'), findsOneWidget);
     });
 
-    testWidgets('shows ListView with correct item count for non-empty list',
-        (tester) async {
+    testWidgets('shows ListView with correct item count for non-empty list', (
+      tester,
+    ) async {
       const rooms = [
         Room(id: 'r-1', type: RoomType.direct, users: [], name: 'Alice'),
         Room(id: 'r-2', type: RoomType.direct, users: [], name: 'Bob'),
       ];
-      await tester.pumpWidget(buildTestable(
-        rooms: const AsyncData(rooms),
-      ));
+      await tester.pumpWidget(buildTestable(rooms: const AsyncData(rooms)));
       await tester.pump();
       expect(find.byType(ListView), findsOneWidget);
       expect(find.byType(ListTile), findsNWidgets(2));
@@ -65,17 +62,17 @@ void main() {
       const rooms = [
         Room(id: 'r-1', type: RoomType.direct, users: [], name: 'Charlie'),
       ];
-      await tester.pumpWidget(buildTestable(
-        rooms: const AsyncData(rooms),
-      ));
+      await tester.pumpWidget(buildTestable(rooms: const AsyncData(rooms)));
       await tester.pump();
       expect(find.text('Charlie'), findsOneWidget);
     });
 
     testWidgets('shows error text when provider emits error', (tester) async {
-      await tester.pumpWidget(buildTestable(
-        rooms: AsyncError(Exception('network error'), StackTrace.empty),
-      ));
+      await tester.pumpWidget(
+        buildTestable(
+          rooms: AsyncError(Exception('network error'), StackTrace.empty),
+        ),
+      );
       await tester.pump();
       expect(find.textContaining('error'), findsOneWidget);
     });

@@ -19,20 +19,19 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: SizedBox(
-      height: MediaQuery.of(context).size.height * 0.70,
-      width: double.infinity,
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          const Padding(
-            padding: EdgeInsets.all(25.0),
-            child: Text(
-                'Enter the email address linked with your account to have a recovery email sent.'),
-          ),
-          Padding(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.70,
+        width: double.infinity,
+        child: Column(
+          children: [
+            const SizedBox(height: 30),
+            const Padding(
+              padding: EdgeInsets.all(25.0),
+              child: Text(
+                'Enter the email address linked with your account to have a recovery email sent.',
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.all(10.0),
               child: SizedBox(
                 height: 50,
@@ -42,26 +41,30 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(hintText: 'Email'),
                 ),
-              )),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: ElevatedButton(
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: ElevatedButton(
                 onPressed: () {
                   _auth.sendPasswordResetEmail(email: _emailController.text);
                   context.pop();
                 },
-                child: const Text('Send Reset Email')),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: ElevatedButton(
+                child: const Text('Send Reset Email'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: ElevatedButton(
                 onPressed: () {
                   context.pop();
                 },
-                child: const Text('Cancel')),
-          ),
-        ],
+                child: const Text('Cancel'),
+              ),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

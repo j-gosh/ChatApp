@@ -17,9 +17,7 @@ class SplashScreen extends StatelessWidget {
             width: MediaQuery.of(context).size.width - 20,
             child: const FlutterLogo(),
           ),
-          const Center(
-            child: CircularProgressIndicator.adaptive(),
-          ),
+          const Center(child: CircularProgressIndicator.adaptive()),
         ],
       ),
     );

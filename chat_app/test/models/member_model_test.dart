@@ -4,11 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('MemberModel', () {
     test('fromJson parses all fields correctly', () {
-      final json = {
-        'userName': 'jdoe',
-        'first': 'John',
-        'last': 'Doe',
-      };
+      final json = {'userName': 'jdoe', 'first': 'John', 'last': 'Doe'};
 
       final member = MemberModel.fromJson(json);
 

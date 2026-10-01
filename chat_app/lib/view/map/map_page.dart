@@ -37,10 +37,12 @@ class _MapPageState extends State<MapPage> {
     Position? position;
     if (Platform.isAndroid) {
       position = await Geolocator.getCurrentPosition(
-          locationSettings: AndroidSettings());
+        locationSettings: AndroidSettings(),
+      );
     } else {
       position = await Geolocator.getCurrentPosition(
-          locationSettings: AppleSettings());
+        locationSettings: AppleSettings(),
+      );
     }
 
     LatLng currentPos = LatLng(position.latitude, position.longitude);
@@ -54,11 +56,14 @@ class _MapPageState extends State<MapPage> {
     final friendsList = await _json.readMapJson();
     for (final element in friendsList) {
       final pos = LatLng(
-          element['location']['latitude'], element['location']['longitude']);
+        element['location']['latitude'],
+        element['location']['longitude'],
+      );
       Marker marker = Marker(
-          markerId: MarkerId(element['id']),
-          position: pos,
-          icon: AssetMapBitmap(friendsList['avatar_url']));
+        markerId: MarkerId(element['id']),
+        position: pos,
+        icon: AssetMapBitmap(friendsList['avatar_url']),
+      );
       _markers.add(marker);
     }
   }

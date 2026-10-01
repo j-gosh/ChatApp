@@ -17,10 +17,16 @@ abstract class AuthService {
   Stream<User?> get authStateChanges;
 
   /// Signs in with email/password and returns the credential.
-  Future<UserCredential> signInWithEmailAndPassword(String email, String password);
+  Future<UserCredential> signInWithEmailAndPassword(
+    String email,
+    String password,
+  );
 
   /// Creates a new Firebase Auth account and returns the credential.
-  Future<UserCredential> createUserWithEmailAndPassword(String email, String password);
+  Future<UserCredential> createUserWithEmailAndPassword(
+    String email,
+    String password,
+  );
 
   /// Signs the current user out.
   Future<void> signOut();
@@ -43,13 +49,25 @@ class FirebaseAuthService implements AuthService {
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
   @override
-  Future<UserCredential> signInWithEmailAndPassword(String email, String password) {
-    return _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+  Future<UserCredential> signInWithEmailAndPassword(
+    String email,
+    String password,
+  ) {
+    return _firebaseAuth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 
   @override
-  Future<UserCredential> createUserWithEmailAndPassword(String email, String password) {
-    return _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+  Future<UserCredential> createUserWithEmailAndPassword(
+    String email,
+    String password,
+  ) {
+    return _firebaseAuth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 
   @override
@@ -61,7 +79,7 @@ class FirebaseAuthService implements AuthService {
   Future<void> createChatUser(String firstName, String lastName) async {
     final id = currentUserId;
     if (id == null) throw Exception('User not authenticated');
-    
+
     await FirebaseChatCore.instance.createUserInFirestore(
       chat_types.User(id: id, firstName: firstName, lastName: lastName),
     );

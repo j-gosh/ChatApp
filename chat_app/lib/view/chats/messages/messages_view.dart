@@ -26,55 +26,53 @@ class _MessagesViewState extends ConsumerState<MessagesView> {
   Widget build(BuildContext context) {
     final currentUser = ref.watch(currentUserProvider);
     final room = ref.watch(selectedRoomProvider);
-    
+
     if (currentUser == null || room == null) {
       return const Scaffold(
         body: Center(child: Text('No user or room selected')),
       );
     }
-    
+
     final chatUser = types.User(id: currentUser.uid);
     final groupThreadMessages = ref.watch(chatMessagesProvider(room));
-    return groupThreadMessages.when(data: (data) {
-      if (data.isNotEmpty) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text(''),
-          ),
-          body: Chat(
-            user: chatUser,
-            showUserNames: true,
-            messages: data,
-            onSendPressed: (text) {
-              final chatController = ref.read(chatControllerProvider);
-              chatController.sendMessage(text, room.id);
-            },
-            emojiEnlargementBehavior: EmojiEnlargementBehavior.single,
-          ),
-        );
-      } else {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('New Message'),
-          ),
-          body: Chat(
-            user: chatUser,
-            showUserNames: true,
-            messages: const [],
-            onSendPressed: (text) {
-              final chatController = ref.read(chatControllerProvider);
-              chatController.sendMessage(text, room.id);
-            },
-            emojiEnlargementBehavior: EmojiEnlargementBehavior.single,
-          ),
-        );
-      }
-    }, error: (error, stackTrace) {
-      return Center(
-        child: Text('$error, $stackTrace'),
-      );
-    }, loading: () {
-      return const LoadingAnimation();
-    });
+    return groupThreadMessages.when(
+      data: (data) {
+        if (data.isNotEmpty) {
+          return Scaffold(
+            appBar: AppBar(title: const Text('')),
+            body: Chat(
+              user: chatUser,
+              showUserNames: true,
+              messages: data,
+              onSendPressed: (text) {
+                final chatController = ref.read(chatControllerProvider);
+                chatController.sendMessage(text, room.id);
+              },
+              emojiEnlargementBehavior: EmojiEnlargementBehavior.single,
+            ),
+          );
+        } else {
+          return Scaffold(
+            appBar: AppBar(title: const Text('New Message')),
+            body: Chat(
+              user: chatUser,
+              showUserNames: true,
+              messages: const [],
+              onSendPressed: (text) {
+                final chatController = ref.read(chatControllerProvider);
+                chatController.sendMessage(text, room.id);
+              },
+              emojiEnlargementBehavior: EmojiEnlargementBehavior.single,
+            ),
+          );
+        }
+      },
+      error: (error, stackTrace) {
+        return Center(child: Text('$error, $stackTrace'));
+      },
+      loading: () {
+        return const LoadingAnimation();
+      },
+    );
   }
 }

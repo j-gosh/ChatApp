@@ -7,9 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
-  Widget buildTestable() => const ProviderScope(
-        child: MaterialApp(home: ProfilePage()),
-      );
+  Widget buildTestable() =>
+      const ProviderScope(child: MaterialApp(home: ProfilePage()));
 
   group('ProfilePage', () {
     testWidgets('renders user avatar', (tester) async {
@@ -59,8 +58,9 @@ void main() {
       expect(find.byType(SnapList), findsNothing);
     });
 
-    testWidgets('tapping Memories tab switches to MemoriesList',
-        (tester) async {
+    testWidgets('tapping Memories tab switches to MemoriesList', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildTestable());
       await tester.tap(find.text('Memories'));
       await tester.pump();

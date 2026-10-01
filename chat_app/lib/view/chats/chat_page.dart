@@ -82,7 +82,6 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   }
 }
 
-
 /**
  * 
                             String email = 'causing@email.com';

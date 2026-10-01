@@ -21,54 +21,58 @@ class _OnboardingPageState extends State<OnboardingPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedBox(
-            height: 70,
-          ),
+          const SizedBox(height: 70),
           // const WelcomeDisplay(),
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: ElevatedButton(
-                onPressed: () async {
-                  await showModalBottomSheet(
-                      isScrollControlled: true,
-                      showDragHandle: true,
-                      isDismissible: true,
-                      context: context,
-                      builder: (context) {
-                        return const LoginPage();
-                      });
-                },
-                child: const Text('Sign in')),
+              onPressed: () async {
+                await showModalBottomSheet(
+                  isScrollControlled: true,
+                  showDragHandle: true,
+                  isDismissible: true,
+                  context: context,
+                  builder: (context) {
+                    return const LoginPage();
+                  },
+                );
+              },
+              child: const Text('Sign in'),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: ElevatedButton(
-                onPressed: () async {
-                  await showModalBottomSheet(
-                      isScrollControlled: true,
-                      showDragHandle: true,
-                      isDismissible: true,
-                      context: context,
-                      builder: (context) {
-                        return const RegistrationPage();
-                      });
-                },
-                child: const Text('Register')),
+              onPressed: () async {
+                await showModalBottomSheet(
+                  isScrollControlled: true,
+                  showDragHandle: true,
+                  isDismissible: true,
+                  context: context,
+                  builder: (context) {
+                    return const RegistrationPage();
+                  },
+                );
+              },
+              child: const Text('Register'),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: ElevatedButton(
-                onPressed: () async {
-                  await showModalBottomSheet(
-                      isScrollControlled: true,
-                      showDragHandle: true,
-                      isDismissible: true,
-                      context: context,
-                      builder: (context) {
-                        return const ResetPasswordPage();
-                      });
-                },
-                child: const Text('Forgot Password')),
+              onPressed: () async {
+                await showModalBottomSheet(
+                  isScrollControlled: true,
+                  showDragHandle: true,
+                  isDismissible: true,
+                  context: context,
+                  builder: (context) {
+                    return const ResetPasswordPage();
+                  },
+                );
+              },
+              child: const Text('Forgot Password'),
+            ),
           ),
         ],
       ),

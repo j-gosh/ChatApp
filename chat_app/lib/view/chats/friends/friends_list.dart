@@ -44,14 +44,18 @@ class _FriendsListState extends ConsumerState<FriendsList> {
                       '${friend.data()['firstName']} ${friend.data()['lastName']}',
                     ),
                     onTap: () {
-                      ref.read(selectedRoomProvider.notifier).select(Room(
-                        id: friend.id,
-                        type: RoomType.direct,
-                        users: [
-                          User(id: user.currentUser!.uid),
-                          User(id: friend.id),
-                        ],
-                      ));
+                      ref
+                          .read(selectedRoomProvider.notifier)
+                          .select(
+                            Room(
+                              id: friend.id,
+                              type: RoomType.direct,
+                              users: [
+                                User(id: user.currentUser!.uid),
+                                User(id: friend.id),
+                              ],
+                            ),
+                          );
                       context.push('/messages');
                     },
                   ),

@@ -49,19 +49,21 @@ void main() {
 
   group('AuthController.signIn', () {
     test('calls signInWithEmailAndPassword with correct credentials', () async {
-      when(() => mockAuth.signInWithEmailAndPassword(any(), any()))
-          .thenAnswer((_) async => mockCredential);
+      when(
+        () => mockAuth.signInWithEmailAndPassword(any(), any()),
+      ).thenAnswer((_) async => mockCredential);
 
       await makeController().signIn('user@test.com', 'pass123');
 
-      verify(() =>
-              mockAuth.signInWithEmailAndPassword('user@test.com', 'pass123'))
-          .called(1);
+      verify(
+        () => mockAuth.signInWithEmailAndPassword('user@test.com', 'pass123'),
+      ).called(1);
     });
 
     test('propagates exception from service', () async {
-      when(() => mockAuth.signInWithEmailAndPassword(any(), any()))
-          .thenThrow(fa.FirebaseAuthException(code: 'wrong-password'));
+      when(
+        () => mockAuth.signInWithEmailAndPassword(any(), any()),
+      ).thenThrow(fa.FirebaseAuthException(code: 'wrong-password'));
 
       await expectLater(
         makeController().signIn('user@test.com', 'wrong'),
@@ -72,20 +74,24 @@ void main() {
 
   group('AuthController.signUp', () {
     setUp(() {
-      when(() => mockAuth.createUserWithEmailAndPassword(any(), any()))
-          .thenAnswer((_) async => mockCredential);
+      when(
+        () => mockAuth.createUserWithEmailAndPassword(any(), any()),
+      ).thenAnswer((_) async => mockCredential);
       when(() => mockVideo.generateVideoCredentials(any())).thenReturn(
         UserVideoCredentials(
           userInfo: const sv.UserInfo(id: 'uid-123'),
           userToken: sv.UserToken.jwt('token-abc'),
         ),
       );
-      when(() => mockVideo.saveUserVideoCredentials(any(), any()))
-          .thenAnswer((_) async {});
-      when(() => mockAuth.createChatUser(any(), any()))
-          .thenAnswer((_) async {});
-      when(() => mockUserService.saveUserProfile(any(), any(), any(), any()))
-          .thenAnswer((_) async {});
+      when(
+        () => mockVideo.saveUserVideoCredentials(any(), any()),
+      ).thenAnswer((_) async {});
+      when(
+        () => mockAuth.createChatUser(any(), any()),
+      ).thenAnswer((_) async {});
+      when(
+        () => mockUserService.saveUserProfile(any(), any(), any(), any()),
+      ).thenAnswer((_) async {});
     });
 
     test('calls createUserWithEmailAndPassword', () async {
@@ -95,8 +101,9 @@ void main() {
         firstName: 'First',
         lastName: 'Last',
       );
-      verify(() => mockAuth.createUserWithEmailAndPassword('a@b.com', 'pass'))
-          .called(1);
+      verify(
+        () => mockAuth.createUserWithEmailAndPassword('a@b.com', 'pass'),
+      ).called(1);
     });
 
     test('calls generateVideoCredentials with returned uid', () async {
@@ -128,9 +135,9 @@ void main() {
         lastName: 'Last',
         userName: 'firstlast',
       );
-      verify(() => mockUserService.saveUserProfile(
-              any(), 'firstlast', any(), any()))
-          .called(1);
+      verify(
+        () => mockUserService.saveUserProfile(any(), 'firstlast', any(), any()),
+      ).called(1);
     });
 
     test('does NOT call saveUserProfile when userName is null', () async {
@@ -141,7 +148,8 @@ void main() {
         lastName: 'Last',
       );
       verifyNever(
-          () => mockUserService.saveUserProfile(any(), any(), any(), any()));
+        () => mockUserService.saveUserProfile(any(), any(), any(), any()),
+      );
     });
   });
 

@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 /// Accepts [items], [currentIndex], and [onTap] so the parent widget controls
 /// all state — this widget is purely presentational.
 class NavBar extends StatelessWidget {
-  const NavBar(
-      {super.key,
-      required this.currentIndex,
-      required this.onTap,
-      required this.items});
+  const NavBar({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+    required this.items,
+  });
 
   final int currentIndex;
   final List<BottomNavigationBarItem> items;

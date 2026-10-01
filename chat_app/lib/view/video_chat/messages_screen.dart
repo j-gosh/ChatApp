@@ -35,8 +35,10 @@ class _ChatSectionState extends State<ChatSection> {
             itemCount: _messages.length,
             itemBuilder: (context, index) {
               return Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 4.0,
+                  horizontal: 8.0,
+                ),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Container(

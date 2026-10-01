@@ -64,10 +64,7 @@ GoRouter router(Ref ref) {
   return GoRouter(
     refreshListenable: notifier,
     routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const HomePage(),
-      ),
+      GoRoute(path: '/', builder: (context, state) => const HomePage()),
       GoRoute(
         path: '/discover',
         builder: (context, state) => const DiscoverPage(),
@@ -76,10 +73,7 @@ GoRouter router(Ref ref) {
         path: '/camera',
         builder: (context, state) => const CameraDisplay(),
       ),
-      GoRoute(
-        path: '/chat',
-        builder: (context, state) => const ChatPage(),
-      ),
+      GoRoute(path: '/chat', builder: (context, state) => const ChatPage()),
       GoRoute(
         path: '/messages',
         name: 'messages',

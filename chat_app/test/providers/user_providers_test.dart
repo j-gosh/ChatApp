@@ -38,32 +38,36 @@ void main() {
       );
     });
 
-    test('returns UserProfile when userId is present and service resolves',
-        () async {
-      const profile = UserProfile(
-        userName: 'jdoe',
-        first: 'John',
-        last: 'Doe',
-        groups: <GroupModel>[],
-      );
-      when(() => mockAuth.currentUserId).thenReturn('uid-1');
-      when(() => mockUser.getUserProfile('uid-1'))
-          .thenAnswer((_) async => profile);
+    test(
+      'returns UserProfile when userId is present and service resolves',
+      () async {
+        const profile = UserProfile(
+          userName: 'jdoe',
+          first: 'John',
+          last: 'Doe',
+          groups: <GroupModel>[],
+        );
+        when(() => mockAuth.currentUserId).thenReturn('uid-1');
+        when(
+          () => mockUser.getUserProfile('uid-1'),
+        ).thenAnswer((_) async => profile);
 
-      final container = makeContainer(
-        authService: mockAuth,
-        userService: mockUser,
-      );
-      addTearDown(container.dispose);
+        final container = makeContainer(
+          authService: mockAuth,
+          userService: mockUser,
+        );
+        addTearDown(container.dispose);
 
-      final result = await container.read(userProfileProvider.future);
-      expect(result, profile);
-    });
+        final result = await container.read(userProfileProvider.future);
+        expect(result, profile);
+      },
+    );
 
     test('propagates service exception as AsyncError', () async {
       when(() => mockAuth.currentUserId).thenReturn('uid-1');
-      when(() => mockUser.getUserProfile('uid-1'))
-          .thenThrow(Exception('Firestore error'));
+      when(
+        () => mockUser.getUserProfile('uid-1'),
+      ).thenThrow(Exception('Firestore error'));
 
       final container = makeContainer(
         authService: mockAuth,
@@ -80,8 +84,9 @@ void main() {
 
   group('publicUsersProvider', () {
     test('calls userService.getPublicUsers()', () async {
-      when(() => mockUser.getPublicUsers())
-          .thenAnswer((_) async => throw UnimplementedError('stub'));
+      when(
+        () => mockUser.getPublicUsers(),
+      ).thenAnswer((_) async => throw UnimplementedError('stub'));
 
       final container = makeContainer(userService: mockUser);
       addTearDown(container.dispose);

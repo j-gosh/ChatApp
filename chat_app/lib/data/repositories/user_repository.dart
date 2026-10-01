@@ -10,11 +10,28 @@ import 'package:flutter_chat_types/flutter_chat_types.dart';
 /// offline support without modifying the service or UI layers.
 abstract class UserRepository {
   Future<UserProfile> getUserProfile(String userId);
-  Future<void> saveUserProfile(String userId, String userName, String firstName, String lastName);
-  Future<void> updateUserProfile(String userId, String userName, String firstName, String lastName);
-  Future<void> saveUserVideoCredentials(String userId, UserVideoCredentials credentials);
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserVideoCredentials(String userId);
-  Stream<QuerySnapshot<Map<String, dynamic>>> getUserFriendsStream(String userId);
+  Future<void> saveUserProfile(
+    String userId,
+    String userName,
+    String firstName,
+    String lastName,
+  );
+  Future<void> updateUserProfile(
+    String userId,
+    String userName,
+    String firstName,
+    String lastName,
+  );
+  Future<void> saveUserVideoCredentials(
+    String userId,
+    UserVideoCredentials credentials,
+  );
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserVideoCredentials(
+    String userId,
+  );
+  Stream<QuerySnapshot<Map<String, dynamic>>> getUserFriendsStream(
+    String userId,
+  );
   Future<void> addUserToFriendsList(String userId, User user);
   Future<QuerySnapshot<Map<String, dynamic>>> getPublicUsers();
 }
@@ -31,27 +48,49 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<void> saveUserProfile(String userId, String userName, String firstName, String lastName) {
+  Future<void> saveUserProfile(
+    String userId,
+    String userName,
+    String firstName,
+    String lastName,
+  ) {
     return _userService.saveUserProfile(userId, userName, firstName, lastName);
   }
 
   @override
-  Future<void> updateUserProfile(String userId, String userName, String firstName, String lastName) {
-    return _userService.updateUserProfile(userId, userName, firstName, lastName);
+  Future<void> updateUserProfile(
+    String userId,
+    String userName,
+    String firstName,
+    String lastName,
+  ) {
+    return _userService.updateUserProfile(
+      userId,
+      userName,
+      firstName,
+      lastName,
+    );
   }
 
   @override
-  Future<void> saveUserVideoCredentials(String userId, UserVideoCredentials credentials) {
+  Future<void> saveUserVideoCredentials(
+    String userId,
+    UserVideoCredentials credentials,
+  ) {
     return _userService.saveUserVideoCredentials(userId, credentials);
   }
 
   @override
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserVideoCredentials(String userId) {
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserVideoCredentials(
+    String userId,
+  ) {
     return _userService.getUserVideoCredentials(userId);
   }
 
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> getUserFriendsStream(String userId) {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getUserFriendsStream(
+    String userId,
+  ) {
     return _userService.getUserFriendsStream(userId);
   }
 

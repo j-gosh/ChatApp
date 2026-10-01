@@ -34,10 +34,11 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
       appBar: AppBar(
         actions: [
           IconButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-              icon: const Icon(Icons.settings))
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+            },
+            icon: const Icon(Icons.settings),
+          ),
         ],
       ),
       body: Column(
@@ -51,10 +52,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
               child: Center(
                 child: Column(
                   children: [
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundColor: Colors.amber,
-                    ),
+                    CircleAvatar(radius: 50, backgroundColor: Colors.amber),
                     Text('User Name '),
                     Text('user ID '),
                   ],
@@ -73,26 +71,12 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Text(
-                        'Snap Totals',
-                      ),
-                      Text(
-                        '$snapTotals',
-                      )
-                    ],
+                    children: [const Text('Snap Totals'), Text('$snapTotals')],
                   ),
                   GestureDetector(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Text(
-                          'Friends',
-                        ),
-                        Text(
-                          '$friends',
-                        ),
-                      ],
+                      children: [const Text('Friends'), Text('$friends')],
                     ),
                     onTap: () {
                       //   context.push('/friends');
@@ -100,14 +84,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Text(
-                        'Following',
-                      ),
-                      Text(
-                        '$following',
-                      ),
-                    ],
+                    children: [const Text('Following'), Text('$following')],
                   ),
                 ],
               ),
@@ -122,33 +99,30 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                 Row(
                   children: [
                     TextButton(
-                        onPressed: () {
-                          selected.value = DataType.snaps;
-                        },
-                        child: const Text(
-                          'Snaps',
-                        )),
+                      onPressed: () {
+                        selected.value = DataType.snaps;
+                      },
+                      child: const Text('Snaps'),
+                    ),
                     TextButton(
-                        onPressed: () {
-                          selected.value = DataType.stories;
-                        },
-                        child: const Text(
-                          'Stories',
-                        )),
+                      onPressed: () {
+                        selected.value = DataType.stories;
+                      },
+                      child: const Text('Stories'),
+                    ),
                     TextButton(
-                        onPressed: () {
-                          selected.value = DataType.memories;
-                        },
-                        child: const Text(
-                          'Memories',
-                        )),
+                      onPressed: () {
+                        selected.value = DataType.memories;
+                      },
+                      child: const Text('Memories'),
+                    ),
                   ],
                 ),
                 selected.value == DataType.snaps
                     ? const SnapList()
                     : selected.value == DataType.stories
-                        ? const StoriesList()
-                        : const MemoriesList()
+                    ? const StoriesList()
+                    : const MemoriesList(),
               ],
             ),
           ),
@@ -157,10 +131,6 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
     );
   }
 }
-
-
-
-
 
 /*
 

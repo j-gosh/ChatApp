@@ -35,8 +35,10 @@ class AuthController {
     final userService = ref.read(userServiceProvider);
     final videoService = ref.read(videoServiceProvider);
 
-    final userCredential =
-        await authService.createUserWithEmailAndPassword(email, password);
+    final userCredential = await authService.createUserWithEmailAndPassword(
+      email,
+      password,
+    );
     final userId = userCredential.user!.uid;
 
     final videoCredentials = videoService.generateVideoCredentials(userId);

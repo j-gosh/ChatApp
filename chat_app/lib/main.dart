@@ -37,9 +37,11 @@ Future<AndroidMapRenderer?> _initializeMapRenderer() async {
   GoogleMapsFlutterPlatform mapsFlutterPlatform =
       GoogleMapsFlutterPlatform.instance;
   if (mapsFlutterPlatform is GoogleMapsFlutterAndroid) {
-    unawaited(mapsFlutterPlatform
-        .initializeWithRenderer(AndroidMapRenderer.latest)
-        .then((value) => completer.complete(value)));
+    unawaited(
+      mapsFlutterPlatform
+          .initializeWithRenderer(AndroidMapRenderer.latest)
+          .then((value) => completer.complete(value)),
+    );
   } else {
     completer.complete(null);
   }

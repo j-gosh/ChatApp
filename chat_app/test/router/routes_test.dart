@@ -55,7 +55,10 @@ void main() {
     });
 
     test('error state returns null regardless of location', () {
-      final error = AsyncError<User?>(Exception('auth error'), StackTrace.empty);
+      final error = AsyncError<User?>(
+        Exception('auth error'),
+        StackTrace.empty,
+      );
       expect(computeRedirect(error, '/'), isNull);
       expect(computeRedirect(error, '/splash'), isNull);
     });

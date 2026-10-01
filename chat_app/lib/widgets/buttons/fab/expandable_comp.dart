@@ -40,10 +40,7 @@ class ExpandingActionButton extends StatelessWidget {
           ),
         );
       },
-      child: FadeTransition(
-        opacity: progress,
-        child: child,
-      ),
+      child: FadeTransition(opacity: progress, child: child),
     );
   }
 }

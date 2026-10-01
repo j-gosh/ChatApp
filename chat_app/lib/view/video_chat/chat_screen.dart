@@ -83,8 +83,7 @@ class _VideoChatScreenState extends ConsumerState<VideoChatScreen> {
   Future showMakeCallDialog(
     List<UserProfile?> friends,
     String userVideoId,
-  ) async{
-
+  ) async {
     String id = '';
     return showDialog(
       context: context,
@@ -152,20 +151,17 @@ class _VideoChatScreenState extends ConsumerState<VideoChatScreen> {
   @override
   Widget build(BuildContext context) {
     final userId = ref.watch(authServiceProvider).currentUserId;
-    final friendsList = ref
-        .watch(userFriendsListProvider(userId!));
+    final friendsList = ref.watch(userFriendsListProvider(userId!));
     final videoCallCredentials = ref.watch(videoCredentialsProvider(userId));
 
     return videoCallCredentials.when(
       data: (data) {
         if (data.userInfo.id.isNotEmpty) {
-
           _initStreamVideo(data.userInfo.id, data.userToken.userId, apiKey);
-          
-          final friend = friendsList.whenData((value) {
-              return value;
 
-          },).value;
+          final friend = friendsList.whenData((value) {
+            return value;
+          }).value;
 
           return Scaffold(
             appBar: AppBar(title: const Text('')),

@@ -9,7 +9,10 @@ import 'package:stream_video/stream_video.dart' as stream;
 /// The concrete implementation is [StreamVideoService].
 abstract class VideoService {
   /// Persists [credentials] to Firestore for [userId].
-  Future<void> saveUserVideoCredentials(String userId, UserVideoCredentials credentials);
+  Future<void> saveUserVideoCredentials(
+    String userId,
+    UserVideoCredentials credentials,
+  );
 
   /// Reads persisted credentials from Firestore for [userId].
   Future<UserVideoCredentials> getUserVideoCredentials(String userId);
@@ -24,15 +27,25 @@ class StreamVideoService implements VideoService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
-  Future<void> saveUserVideoCredentials(String userId, UserVideoCredentials credentials) {
-    return _firestore.collection('userVideoCredential').doc(userId).set(credentials.toJson());
+  Future<void> saveUserVideoCredentials(
+    String userId,
+    UserVideoCredentials credentials,
+  ) {
+    return _firestore
+        .collection('userVideoCredential')
+        .doc(userId)
+        .set(credentials.toJson());
   }
 
   @override
   Future<UserVideoCredentials> getUserVideoCredentials(String userId) async {
-    final doc = await _firestore.collection('userVideoCredential').doc(userId).get();
+    final doc = await _firestore
+        .collection('userVideoCredential')
+        .doc(userId)
+        .get();
     final data = doc.data();
-    if (data == null) throw Exception('Video credentials not found for user: $userId');
+    if (data == null)
+      throw Exception('Video credentials not found for user: $userId');
     return UserVideoCredentials.fromJson(data);
   }
 
@@ -43,4 +56,5 @@ class StreamVideoService implements VideoService {
     return UserVideoCredentials(userInfo: userInfo, userToken: userToken);
   }
 }
- const String apiKey = '';
+
+const String apiKey = '';

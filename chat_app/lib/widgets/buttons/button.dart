@@ -13,13 +13,15 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: onPressed,
-        style: ButtonStyle(
-            backgroundColor: WidgetStateProperty.resolveWith((states) {
+      onPressed: onPressed,
+      style: ButtonStyle(
+        backgroundColor: WidgetStateProperty.resolveWith((states) {
           return states.contains(WidgetState.pressed)
               ? AppTheme.appTheme.colorScheme.onSecondary
               : AppTheme.appTheme.colorScheme.secondary;
-        })),
-        child: Text(text));
+        }),
+      ),
+      child: Text(text),
+    );
   }
 }

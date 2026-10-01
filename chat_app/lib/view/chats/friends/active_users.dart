@@ -38,20 +38,24 @@ class _ActiveUsersState extends ConsumerState<ActiveUsers> {
                 child: ListTile(
                   leading: Text('${user.firstName} ${user.lastName}'),
                   onTap: () {
-                    ref.read(selectedRoomProvider.notifier).select(Room(
-                      imageUrl: user.imageUrl,
-                      lastMessages: const [],
-                      createdAt: DateTime.now().millisecondsSinceEpoch,
-                      updatedAt: DateTime.now().millisecondsSinceEpoch,
-                      metadata: user.metadata,
-                      name: '${user.firstName} ${user.lastName}',
-                      id: user.id,
-                      type: RoomType.direct,
-                      users: [
-                        User(id: auth.currentUser!.uid),
-                        User(id: user.id),
-                      ],
-                    ));
+                    ref
+                        .read(selectedRoomProvider.notifier)
+                        .select(
+                          Room(
+                            imageUrl: user.imageUrl,
+                            lastMessages: const [],
+                            createdAt: DateTime.now().millisecondsSinceEpoch,
+                            updatedAt: DateTime.now().millisecondsSinceEpoch,
+                            metadata: user.metadata,
+                            name: '${user.firstName} ${user.lastName}',
+                            id: user.id,
+                            type: RoomType.direct,
+                            users: [
+                              User(id: auth.currentUser!.uid),
+                              User(id: user.id),
+                            ],
+                          ),
+                        );
                     chatService.createRoom(
                       User(
                         id: user.id,

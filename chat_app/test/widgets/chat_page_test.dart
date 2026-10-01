@@ -17,22 +17,25 @@ Widget buildTestable() {
 
 void main() {
   group('ChatPage', () {
-    testWidgets('initial state shows Chats and New buttons (chatPageIndex 0)',
-        (tester) async {
+    testWidgets('initial state shows Chats and New buttons (chatPageIndex 0)', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildTestable());
       expect(find.text('Chats'), findsOneWidget);
       expect(find.text('New'), findsOneWidget);
     });
 
-    testWidgets('initial state does NOT show Friends / Active Users buttons',
-        (tester) async {
+    testWidgets('initial state does NOT show Friends / Active Users buttons', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildTestable());
       expect(find.text('Friends'), findsNothing);
       expect(find.text('Active Users'), findsNothing);
     });
 
-    testWidgets('tapping New shows Friends and Active Users buttons',
-        (tester) async {
+    testWidgets('tapping New shows Friends and Active Users buttons', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildTestable());
       await tester.tap(find.text('New'));
       await tester.pump();
@@ -41,8 +44,9 @@ void main() {
       expect(find.text('Active Users'), findsOneWidget);
     });
 
-    testWidgets('tapping Chats after New resets to chatPageIndex 0',
-        (tester) async {
+    testWidgets('tapping Chats after New resets to chatPageIndex 0', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildTestable());
 
       // Go to friends view
@@ -57,8 +61,9 @@ void main() {
       expect(find.text('Friends'), findsNothing);
     });
 
-    testWidgets('renders MessageThreadsList when chatPageIndex is 0',
-        (tester) async {
+    testWidgets('renders MessageThreadsList when chatPageIndex is 0', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildTestable());
       await tester.pump(); // let stream settle
 

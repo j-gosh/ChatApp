@@ -4,21 +4,23 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Message', () {
-    test('fromJson converts Timestamp to DateTime — regression for raw assignment bug',
-        () {
-      final timestamp = Timestamp.fromMillisecondsSinceEpoch(1_000_000_000);
-      final json = {
-        'text': 'Hello',
-        'sentAt': timestamp,
-        'sentByUid': 'uid-1',
-      };
+    test(
+      'fromJson converts Timestamp to DateTime — regression for raw assignment bug',
+      () {
+        final timestamp = Timestamp.fromMillisecondsSinceEpoch(1_000_000_000);
+        final json = {
+          'text': 'Hello',
+          'sentAt': timestamp,
+          'sentByUid': 'uid-1',
+        };
 
-      final message = Message.fromJson(json);
+        final message = Message.fromJson(json);
 
-      expect(message.text, 'Hello');
-      expect(message.sentAt, timestamp.toDate());
-      expect(message.sentByUid, 'uid-1');
-    });
+        expect(message.text, 'Hello');
+        expect(message.sentAt, timestamp.toDate());
+        expect(message.sentByUid, 'uid-1');
+      },
+    );
 
     test('toJson converts DateTime back to Timestamp', () {
       final dt = DateTime.fromMillisecondsSinceEpoch(1_000_000_000);
@@ -32,7 +34,11 @@ void main() {
 
     test('toJson/fromJson round-trip produces equal object', () {
       final dt = DateTime.fromMillisecondsSinceEpoch(1_000_000_000);
-      final original = Message(text: 'Round trip', sentAt: dt, sentByUid: 'uid-3');
+      final original = Message(
+        text: 'Round trip',
+        sentAt: dt,
+        sentByUid: 'uid-3',
+      );
       final roundTripped = Message.fromJson(original.toJson());
       expect(roundTripped, original);
     });

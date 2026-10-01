@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 /// All data is passed as path parameters — no additional network requests
 /// are made when this screen opens.
 class SelectedProfile extends StatefulWidget {
-  const SelectedProfile(
-      {super.key,
-      required this.name,
-      required this.snaps,
-      required this.following,
-      required this.image});
+  const SelectedProfile({
+    super.key,
+    required this.name,
+    required this.snaps,
+    required this.following,
+    required this.image,
+  });
 
   final String name;
   final String snaps;
@@ -61,19 +62,27 @@ class _SelectedProfileState extends State<SelectedProfile> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Text('snap totals',
-                          style: TextStyle(color: Colors.black)),
-                      Text(widget.snaps,
-                          style: const TextStyle(color: Colors.black))
+                      const Text(
+                        'snap totals',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      Text(
+                        widget.snaps,
+                        style: const TextStyle(color: Colors.black),
+                      ),
                     ],
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Text('Following',
-                          style: TextStyle(color: Colors.black)),
-                      Text(widget.following,
-                          style: const TextStyle(color: Colors.black)),
+                      const Text(
+                        'Following',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      Text(
+                        widget.following,
+                        style: const TextStyle(color: Colors.black),
+                      ),
                     ],
                   ),
                 ],

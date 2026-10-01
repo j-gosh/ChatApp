@@ -22,14 +22,15 @@ class _CallContainerState extends ConsumerState<CallContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height * 80,
-        width: MediaQuery.of(context).size.width - 5,
-        padding: const EdgeInsets.all(8.0),
-        child: StreamCallContainer(
-          call: widget.call,
-          callContentWidgetBuilder: (context, call) {
-            return StreamCallContent(call: call);
-          },
-        ));
+      height: MediaQuery.of(context).size.height * 80,
+      width: MediaQuery.of(context).size.width - 5,
+      padding: const EdgeInsets.all(8.0),
+      child: StreamCallContainer(
+        call: widget.call,
+        callContentWidgetBuilder: (context, call) {
+          return StreamCallContent(call: call);
+        },
+      ),
+    );
   }
 }

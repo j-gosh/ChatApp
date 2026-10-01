@@ -31,11 +31,15 @@ class _MessageThreadsListState extends ConsumerState<MessageThreadsList> {
                 child: ListTile(
                   leading: Text('${data[index].name}'),
                   onTap: () {
-                    ref.read(selectedRoomProvider.notifier).select(Room(
-                      id: data[index].id,
-                      type: data[index].type,
-                      users: data[index].users,
-                    ));
+                    ref
+                        .read(selectedRoomProvider.notifier)
+                        .select(
+                          Room(
+                            id: data[index].id,
+                            type: data[index].type,
+                            users: data[index].users,
+                          ),
+                        );
 
                     context.push('/messages');
                   },

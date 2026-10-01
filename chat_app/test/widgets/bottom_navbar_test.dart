@@ -17,8 +17,9 @@ void main() {
       expect(find.byType(BottomNavigationBarItem), findsNWidgets(4));
     });
 
-    testWidgets('reflects navigationIndexProvider initial value of 0',
-        (tester) async {
+    testWidgets('reflects navigationIndexProvider initial value of 0', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(
@@ -32,8 +33,9 @@ void main() {
       expect(navBar.currentIndex, 0);
     });
 
-    testWidgets('tapping a nav item calls setIndex on the notifier',
-        (tester) async {
+    testWidgets('tapping a nav item calls setIndex on the notifier', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(

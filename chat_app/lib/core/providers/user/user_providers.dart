@@ -19,15 +19,17 @@ Future<UserProfile> userProfile(Ref ref) async {
 /// the user identified by [userId].
 @riverpod
 Future<DocumentSnapshot<Map<String, dynamic>>> userVideoCredentials(
-    Ref ref, String userId) =>
-    ref.watch(userServiceProvider).getUserVideoCredentials(userId);
+  Ref ref,
+  String userId,
+) => ref.watch(userServiceProvider).getUserVideoCredentials(userId);
 
 /// Real-time stream of all friends documents in the `userFriendsList/{userId}/friends`
 /// Firestore subcollection.
 @riverpod
 Stream<QuerySnapshot<Map<String, dynamic>>> userFriendsStream(
-    Ref ref, String userId) =>
-    ref.watch(userServiceProvider).getUserFriendsStream(userId);
+  Ref ref,
+  String userId,
+) => ref.watch(userServiceProvider).getUserFriendsStream(userId);
 
 /// One-time fetch of all documents in the public `users` Firestore collection.
 @riverpod

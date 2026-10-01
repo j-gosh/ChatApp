@@ -21,34 +21,27 @@ class _DiscoverPageState extends State<DiscoverPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Discover'),
-          actions: const [ProfileAvatar()],
-        ),
-        body: Stack(
-          children: [
-            ListView(
-              physics: const ClampingScrollPhysics(),
-              shrinkWrap: true,
-              children: const [
-                SubTile(),
-                Divider(
-                  color: Colors.black,
-                ),
-                ForYouTile(),
-                Divider(
-                  color: Colors.black,
-                ),
-                StoryTile(),
-                Divider(
-                  color: Colors.black,
-                ),
-                SizedBox(
-                  height: 70,
-                )
-              ],
-            ),
-          ],
-        ));
+      appBar: AppBar(
+        title: const Text('Discover'),
+        actions: const [ProfileAvatar()],
+      ),
+      body: Stack(
+        children: [
+          ListView(
+            physics: const ClampingScrollPhysics(),
+            shrinkWrap: true,
+            children: const [
+              SubTile(),
+              Divider(color: Colors.black),
+              ForYouTile(),
+              Divider(color: Colors.black),
+              StoryTile(),
+              Divider(color: Colors.black),
+              SizedBox(height: 70),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

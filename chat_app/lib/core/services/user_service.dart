@@ -16,19 +16,36 @@ abstract class UserService {
   Future<UserProfile> getUserProfile(String userId);
 
   /// Creates a new profile document in `profileData/{userId}`.
-  Future<void> saveUserProfile(String userId, String userName, String firstName, String lastName);
+  Future<void> saveUserProfile(
+    String userId,
+    String userName,
+    String firstName,
+    String lastName,
+  );
 
   /// Updates an existing profile document in `profileData/{userId}`.
-  Future<void> updateUserProfile(String userId, String userName, String firstName, String lastName);
+  Future<void> updateUserProfile(
+    String userId,
+    String userName,
+    String firstName,
+    String lastName,
+  );
 
   /// Writes Stream Video credentials to `userVideoCredential/{userId}`.
-  Future<void> saveUserVideoCredentials(String userId, UserVideoCredentials credentials);
+  Future<void> saveUserVideoCredentials(
+    String userId,
+    UserVideoCredentials credentials,
+  );
 
   /// Reads the raw Firestore doc from `userVideoCredential/{userId}`.
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserVideoCredentials(String userId);
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserVideoCredentials(
+    String userId,
+  );
 
   /// Live stream of the `userFriendsList/{userId}/friends` subcollection.
-  Stream<QuerySnapshot<Map<String, dynamic>>> getUserFriendsStream(String userId);
+  Stream<QuerySnapshot<Map<String, dynamic>>> getUserFriendsStream(
+    String userId,
+  );
 
   /// Adds [user] to the `userFriendsList/{userId}/friends` subcollection.
   Future<void> addUserToFriendsList(String userId, User user);
@@ -50,7 +67,12 @@ class FirestoreUserService implements UserService {
   }
 
   @override
-  Future<void> saveUserProfile(String userId, String userName, String firstName, String lastName) {
+  Future<void> saveUserProfile(
+    String userId,
+    String userName,
+    String firstName,
+    String lastName,
+  ) {
     return _firestore.collection('profileData').doc(userId).set({
       'userName': userName,
       'first': firstName,
@@ -60,7 +82,12 @@ class FirestoreUserService implements UserService {
   }
 
   @override
-  Future<void> updateUserProfile(String userId, String userName, String firstName, String lastName) {
+  Future<void> updateUserProfile(
+    String userId,
+    String userName,
+    String firstName,
+    String lastName,
+  ) {
     return _firestore.collection('profileData').doc(userId).update({
       'userName': userName,
       'first': firstName,
@@ -69,17 +96,27 @@ class FirestoreUserService implements UserService {
   }
 
   @override
-  Future<void> saveUserVideoCredentials(String userId, UserVideoCredentials credentials) {
-    return _firestore.collection('userVideoCredential').doc(userId).set(credentials.toJson());
+  Future<void> saveUserVideoCredentials(
+    String userId,
+    UserVideoCredentials credentials,
+  ) {
+    return _firestore
+        .collection('userVideoCredential')
+        .doc(userId)
+        .set(credentials.toJson());
   }
 
   @override
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserVideoCredentials(String userId) {
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserVideoCredentials(
+    String userId,
+  ) {
     return _firestore.collection('userVideoCredential').doc(userId).get();
   }
 
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> getUserFriendsStream(String userId) {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getUserFriendsStream(
+    String userId,
+  ) {
     return _firestore
         .collection('userFriendsList')
         .doc(userId)
@@ -93,11 +130,13 @@ class FirestoreUserService implements UserService {
         .collection('userFriendsList')
         .doc(userId)
         .collection('friends')
-        .add(User(
-          id: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        ).toJson());
+        .add(
+          User(
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+          ).toJson(),
+        );
   }
 
   @override

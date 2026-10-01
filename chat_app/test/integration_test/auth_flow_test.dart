@@ -37,7 +37,9 @@ void main() {
     const testFirstName = 'Test';
     const testLastName = 'User';
 
-    testWidgets('sign up creates account and lands on HomePage', (tester) async {
+    testWidgets('sign up creates account and lands on HomePage', (
+      tester,
+    ) async {
       app.main();
       await tester.pumpAndSettle();
 
@@ -72,8 +74,9 @@ void main() {
       expect(find.text('Sign in'), findsOneWidget);
     });
 
-    testWidgets('sign in with existing credentials lands on HomePage',
-        (tester) async {
+    testWidgets('sign in with existing credentials lands on HomePage', (
+      tester,
+    ) async {
       app.main();
       await tester.pumpAndSettle();
 
