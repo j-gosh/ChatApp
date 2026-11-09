@@ -1,0 +1,57 @@
+# Sign-up → sign-out → sign-in against the Firebase emulators.
+#
+#   firebase emulators:start --only auth,firestore,functions   (repo root)
+#   EXPO_PUBLIC_FIREBASE_EMULATOR_HOST=localhost npx expo run:ios
+#   maestro test -e APP_ID=com.example.chatApp e2e/auth-flow.yaml
+appId: ${APP_ID}
+env:
+  EMAIL: e2e_${MAESTRO_RUN_ID}@example.com
+  PASSWORD: Test1234!
+---
+- launchApp:
+    clearState: true
+
+# Sign up lands on the Chat tab.
+- tapOn:
+    id: open-register
+- tapOn:
+    id: register-first-name
+- inputText: Test
+- tapOn:
+    id: register-last-name
+- inputText: User
+- tapOn:
+    id: register-email
+- inputText: ${EMAIL}
+- tapOn:
+    id: register-password
+- inputText: ${PASSWORD}
+- tapOn:
+    id: register-submit
+- extendedWaitUntil:
+    visible: New
+    timeout: 15000
+
+# Sign out returns to onboarding.
+- tapOn: Open profile
+- tapOn: Sign out
+- tapOn: Sign out
+- extendedWaitUntil:
+    visible:
+      id: open-login
+    timeout: 10000
+
+# Signing in again lands on the Chat tab.
+- tapOn:
+    id: open-login
+- tapOn:
+    id: login-email
+- inputText: ${EMAIL}
+- tapOn:
+    id: login-password
+- inputText: ${PASSWORD}
+- tapOn:
+    id: login-submit
+- extendedWaitUntil:
+    visible: New
+    timeout: 15000

@@ -1,0 +1,5 @@
+node_modules
+.expo
+coverage
+assets/json
+package-lock.json

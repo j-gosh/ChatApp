@@ -2,120 +2,110 @@ name: CI
 
 on:
   pull_request:
+    paths:
+      - 'chat_app/**'
+      - 'functions/**'
+      - 'firestore.rules'
+      - 'storage.rules'
+      - 'firebase.json'
+      - '.github/workflows/ci.yml'
   push:
     branches: [main, develop]
+    paths:
+      - 'chat_app/**'
+      - 'functions/**'
+      - 'firestore.rules'
+      - 'storage.rules'
+      - 'firebase.json'
+      - '.github/workflows/ci.yml'
 
-# Cancel superseded runs on the same branch/PR
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
+  group: rn-ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
   contents: read
 
-# Must match the Flutter version used locally; pubspec.lock pins SDK packages
-# and `--enforce-lockfile` fails if they drift.
 env:
-  FLUTTER_VERSION: 3.47.2
-
-# Flutter project lives in chat_app/, not the repo root
-defaults:
-  run:
-    working-directory: chat_app
+  # Matches the Cloud Functions runtime (functions/package.json engines).
+  NODE_VERSION: 22
 
 jobs:
-  # Formatting + static analysis + lockfile consistency
-  format-analyze:
-    name: Format & analyze
+  # Lint, type check, formatting, and unit tests for the Expo app.
+  # Native builds need Firebase/Maps/Stream secrets, so they are not run here.
+  app:
+    name: App checks
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: chat_app
     steps:
       - uses: actions/checkout@v4
 
-      - uses: subosito/flutter-action@v2
+      - uses: actions/setup-node@v4
         with:
-          channel: stable
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-          cache: true
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: chat_app/package-lock.json
 
-      # Fails if pubspec.lock is missing, stale, or doesn't satisfy pubspec.yaml
-      - name: Verify pubspec.lock matches pubspec.yaml
-        run: flutter pub get --enforce-lockfile
+      - run: npm ci
 
       - name: Check formatting
-        run: dart format --output=none --set-exit-if-changed .
+        run: npm run format:check
 
-      - name: Analyze
-        run: flutter analyze
+      - name: Lint
+        run: npm run lint
 
-  # Dependency review (PRs only): flags new vulnerable or
-  # disallowed-license packages added via pubspec.lock
-  dependency-review:
-    name: Dependency review
-    if: github.event_name == 'pull_request'
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm test -- --ci
+
+  # Type check and build the Cloud Functions.
+  functions:
+    name: Functions build
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write # lets it post a summary comment
+    defaults:
+      run:
+        working-directory: functions
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/dependency-review-action@v4
+      - uses: actions/setup-node@v4
         with:
-          fail-on-severity: moderate
-          comment-summary-in-pr: on-failure
-          # Optional license policy:
-          # deny-licenses: GPL-3.0, AGPL-3.0
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: functions/package-lock.json
 
-  # Android build
-  build-android:
-    name: Build Android
-    needs: format-analyze
+      - run: npm ci
+
+      - name: Build
+        run: npm run build
+
+  # Firestore and Storage security rules, tested against the emulators.
+  rules:
+    name: Security rules
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: functions/package-lock.json
+
+      # The Firebase emulators need Java.
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
-          cache: gradle
+          java-version: 21
 
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-          cache: true
+      - run: npm ci
+        working-directory: functions
 
-      - run: flutter pub get --enforce-lockfile
-
-      # Debug build avoids needing release signing keys in CI.
-      # Switch to `flutter build appbundle --release` once signing secrets are set up.
-      - name: Build APK
-        run: flutter build apk --debug
-
-  # iOS build (no code signing)
-  build-ios:
-    name: Build iOS
-    needs: format-analyze # saves macOS minutes if formatting/analysis fails
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-          cache: true
-
-      - run: flutter pub get --enforce-lockfile
-
-      - name: Cache CocoaPods
-        uses: actions/cache@v4
-        with:
-          path: chat_app/ios/Pods
-          key: pods-${{ runner.os }}-${{ hashFiles('chat_app/ios/Podfile.lock') }}
-          restore-keys: pods-${{ runner.os }}-
-
-      # `flutter build ios` runs `pod install` automatically
-      - name: Build iOS (unsigned)
-        run: flutter build ios --release --no-codesign
+      - name: Test rules
+        run: >-
+          npx --yes firebase-tools@15 emulators:exec --project demo-chat-app-rules
+          --only firestore,storage "npm --prefix functions run test:rules"
