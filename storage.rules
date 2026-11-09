@@ -1,0 +1,51 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isUser(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function isImageUpload() {
+      return request.resource.contentType.matches('image/.*')
+        && request.resource.size < 10 * 1024 * 1024;
+    }
+
+    match /avatars/{uid}/{fileName} {
+      allow read: if signedIn();
+      allow create, update: if isUser(uid) && isImageUpload();
+      allow delete: if isUser(uid);
+    }
+
+    // Mirrors the read rule on `stories/{storyId}` in Firestore.
+    match /stories/{ownerId}/{storyId}/{fileName} {
+      function canViewStory() {
+        let story = firestore.get(/databases/(default)/documents/stories/$(storyId)).data;
+        return story.visibility == 'everyone' || request.auth.uid in story.viewerIds;
+      }
+
+      allow read: if isUser(ownerId) || (signedIn() && canViewStory());
+      allow create: if isUser(ownerId) && isImageUpload();
+      allow delete: if isUser(ownerId);
+    }
+
+    match /memories/{uid}/{memoryId}/{fileName} {
+      allow read, delete: if isUser(uid);
+      allow create: if isUser(uid) && isImageUpload();
+    }
+
+    // Readable by each recipient until they open (and delete) their snap document.
+    match /snaps/{senderId}/{batchId}/{fileName} {
+      allow read: if isUser(senderId)
+        || (signedIn() && firestore.exists(
+          /databases/(default)/documents/snaps/$(batchId + '_' + request.auth.uid)
+        ));
+      allow create: if isUser(senderId) && isImageUpload();
+      allow delete: if isUser(senderId);
+    }
+  }
+}

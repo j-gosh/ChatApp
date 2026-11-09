@@ -1,0 +1,122 @@
+rules_version = '2';
+
+// Firestore rules don't filter results: every query the app runs must be
+// constrained so that all matching documents pass these rules.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isUser(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function changedOnly(keys) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(keys);
+    }
+
+    // Public chat users.
+    match /users/{uid} {
+      allow read: if signedIn();
+      allow create, update: if isUser(uid);
+    }
+
+    match /rooms/{roomId} {
+      allow read, update: if signedIn() && request.auth.uid in resource.data.userIds;
+      allow create: if signedIn() && request.auth.uid in request.resource.data.userIds;
+
+      match /messages/{messageId} {
+        function isMember() {
+          return request.auth.uid in get(/databases/$(database)/documents/rooms/$(roomId)).data.userIds;
+        }
+
+        allow read: if signedIn() && isMember();
+        allow create: if signedIn() && isMember() && request.resource.data.authorId == request.auth.uid;
+      }
+    }
+
+    // `snapCount` is maintained by Cloud Functions only.
+    match /profileData/{uid} {
+      function validLocationSharing() {
+        return request.resource.data.get('locationSharing', 'off') in ['off', 'whileUsing', 'always'];
+      }
+
+      allow read: if signedIn();
+      allow create: if isUser(uid)
+        && !('snapCount' in request.resource.data)
+        && validLocationSharing();
+      allow update: if isUser(uid)
+        && request.resource.data.get('snapCount', 0) == resource.data.get('snapCount', 0)
+        && validLocationSharing();
+    }
+
+    // People `uid` has added as friends. Only Cloud Functions read other users' lists.
+    match /userFriendsList/{uid}/friends/{friendId} {
+      allow read, write: if isUser(uid);
+    }
+
+    match /following/{uid}/users/{targetId} {
+      allow read: if signedIn();
+      allow create, delete: if isUser(uid) && targetId != uid;
+    }
+
+    // `viewerIds` (owner + owner's friends) is maintained by Cloud Functions.
+    match /stories/{storyId} {
+      function validVisibility() {
+        return request.resource.data.visibility in ['everyone', 'friends'];
+      }
+
+      allow read: if signedIn() && (
+        resource.data.visibility == 'everyone'
+        || request.auth.uid in resource.data.viewerIds
+        || resource.data.ownerId == request.auth.uid
+      );
+      allow create: if signedIn()
+        && request.resource.data.ownerId == request.auth.uid
+        && request.resource.data.viewerIds == [request.auth.uid]
+        && request.resource.data.storagePath.matches('stories/' + request.auth.uid + '/' + storyId + '/.*')
+        && validVisibility();
+      allow update: if signedIn()
+        && resource.data.ownerId == request.auth.uid
+        && changedOnly(['visibility', 'caption'])
+        && validVisibility();
+      allow delete: if signedIn() && resource.data.ownerId == request.auth.uid;
+    }
+
+    // One document per recipient, id `{batchId}_{recipientId}`. Recipients delete
+    // a snap once they've opened it; Cloud Functions clean up the photo.
+    match /snaps/{snapId} {
+      allow read, delete: if signedIn() && resource.data.recipientId == request.auth.uid;
+      allow create: if signedIn()
+        && request.resource.data.senderId == request.auth.uid
+        && request.resource.data.recipientId != request.auth.uid
+        && snapId == request.resource.data.batchId + '_' + request.resource.data.recipientId
+        && request.resource.data.storagePath.matches(
+          'snaps/' + request.auth.uid + '/' + request.resource.data.batchId + '/.*'
+        );
+    }
+
+    match /memories/{uid}/items/{memoryId} {
+      allow read, create, delete: if isUser(uid);
+    }
+
+    // `viewerIds` (owner + owner's friends) is maintained by Cloud Functions.
+    match /locations/{uid} {
+      allow read: if signedIn() && request.auth.uid in resource.data.viewerIds;
+      allow create: if isUser(uid) && request.resource.data.viewerIds == [uid];
+      allow update: if isUser(uid)
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['viewerIds']);
+      allow delete: if isUser(uid);
+    }
+
+    // Content managed from the Firebase console.
+    match /news/{articleId} {
+      allow read: if signedIn();
+    }
+
+    match /subscriptions/{subscriptionId} {
+      allow read: if signedIn();
+    }
+  }
+}
