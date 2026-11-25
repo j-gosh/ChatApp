@@ -1,7 +1,7 @@
 import { router, Stack } from 'expo-router';
 import { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { GiftedChat, MessageText, type IMessage } from 'react-native-gifted-chat';
+import { Bubble, GiftedChat, MessageText, Send, type IMessage } from 'react-native-gifted-chat';
 import { Button, Text } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -13,6 +13,7 @@ import { useChatMessages } from '@/hooks/chat/use-chat-messages';
 import { useSignedInUser } from '@/providers/AuthStateProvider';
 import { useChatStore } from '@/stores/chat-store';
 import { showSnackbar } from '@/stores/snackbar-store';
+import { colors } from '@/theme/app-theme';
 import { isSingleEmoji } from '@/utils/emoji';
 
 /**
@@ -61,6 +62,17 @@ export function MessagesScreen() {
           user={{ _id: currentUser.uid }}
           isUsernameVisible
           disableKeyboardProvider
+          renderBubble={(props) => (
+            <Bubble
+              {...props}
+              wrapperStyle={{
+                left: { backgroundColor: colors.surfaceVariant },
+                right: { backgroundColor: colors.primary },
+              }}
+              textStyle={{ left: { color: colors.text }, right: { color: colors.onPrimary } }}
+            />
+          )}
+          renderSend={(props) => <Send {...props} textStyle={styles.sendText} />}
           renderMessageText={(props) =>
             props.currentMessage && isSingleEmoji(props.currentMessage.text) ? (
               <Text style={styles.emoji}>{props.currentMessage.text}</Text>
@@ -75,7 +87,8 @@ export function MessagesScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
+  container: { flex: 1, backgroundColor: colors.surface },
   centered: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 8 },
   emoji: { fontSize: 40, lineHeight: 48, padding: 6 },
+  sendText: { color: colors.primary },
 });

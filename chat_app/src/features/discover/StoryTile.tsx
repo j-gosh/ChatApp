@@ -9,7 +9,7 @@ import { useStoryFeed } from '@/hooks/stories/use-story-feed';
 import type { Story } from '@/models/story';
 import { useSignedInUser } from '@/providers/AuthStateProvider';
 import { useStoryStore } from '@/stores/story-store';
-import { palette } from '@/theme/app-theme';
+import { colors } from '@/theme/app-theme';
 
 /** Stories from friends and people you follow, as a row of avatars. Tapping one opens the viewer. */
 export function StoryTile() {
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   container: { padding: 4 },
   list: { gap: 12, paddingHorizontal: 8 },
   story: { alignItems: 'center', width: 76 },
-  ring: { borderWidth: 3, borderColor: palette.amber, borderRadius: 40, padding: 2 },
+  ring: { borderWidth: 3, borderColor: colors.accent, borderRadius: 40, padding: 2 },
   name: { marginTop: 4, fontSize: 12 },
   message: { padding: 12, textAlign: 'center' },
 });

@@ -23,6 +23,7 @@ import { ModeRow } from '@/features/camera/ModeRow';
 import { PhotoShareActions } from '@/features/camera/PhotoShareActions';
 import { useIsAppActive } from '@/hooks/use-is-app-active';
 import { showSnackbar } from '@/stores/snackbar-store';
+import { colors } from '@/theme/app-theme';
 import { getErrorMessage } from '@/utils/errors';
 
 type LightMode = FlashMode | 'torch';
@@ -30,7 +31,7 @@ type MeteringMode = 'auto' | 'locked';
 type Panel = 'flash' | 'exposure' | 'focus';
 
 const EXPOSURE_STEP = 0.5;
-const ICON_COLOR = '#2196F3';
+const ICON_COLOR = colors.primary;
 
 function reportError(action: string, error: unknown) {
   console.error(`[camera] ${action} failed`, error);
@@ -220,14 +221,14 @@ export function CameraScreen() {
         />
         <IconButton
           icon="stop"
-          iconColor="#F44336"
+          iconColor={colors.danger}
           disabled={!isRecording}
           onPress={() => runRecorder('Stopping', (active) => active.stopRecording())}
           accessibilityLabel="Stop recording"
         />
         <IconButton
           icon={isPreviewPaused ? 'play-box-outline' : 'pause-box-outline'}
-          iconColor={isPreviewPaused ? '#F44336' : ICON_COLOR}
+          iconColor={isPreviewPaused ? colors.danger : ICON_COLOR}
           disabled={isRecording}
           onPress={() => setIsPreviewPaused((paused) => !paused)}
           accessibilityLabel={isPreviewPaused ? 'Resume preview' : 'Pause preview'}
@@ -356,10 +357,10 @@ export function CameraScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
+  container: { flex: 1, backgroundColor: colors.surface },
   centered: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  preview: { flex: 1, backgroundColor: '#000000', borderWidth: 3, borderColor: '#9E9E9E' },
-  previewRecording: { borderColor: '#FF5252' },
+  preview: { flex: 1, backgroundColor: '#000000', borderWidth: 3, borderColor: colors.outline },
+  previewRecording: { borderColor: colors.danger },
   row: { flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' },
   bottomRow: { justifyContent: 'space-between', padding: 5 },
   exposureOffset: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },

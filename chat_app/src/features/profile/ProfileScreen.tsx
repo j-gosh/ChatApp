@@ -23,7 +23,7 @@ import { useUserProfile } from '@/hooks/user/use-user-profile';
 import { getUserDisplayName } from '@/models/chat';
 import { useSignedInUser } from '@/providers/AuthStateProvider';
 import { showSnackbar } from '@/stores/snackbar-store';
-import { palette } from '@/theme/app-theme';
+import { appBarTheme, colors } from '@/theme/app-theme';
 import { getDataErrorMessage } from '@/utils/errors';
 
 /** Which content tab the profile shows. */
@@ -103,7 +103,7 @@ export function ProfileScreen() {
           headerRight: () => (
             <IconButton
               icon="cog"
-              iconColor={palette.white}
+              iconColor={appBarTheme.tintColor}
               onPress={() => router.push('/settings')}
               accessibilityLabel="Settings"
             />
@@ -176,7 +176,7 @@ export function ProfileScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
+  container: { flex: 1, backgroundColor: colors.surface },
   header: { alignItems: 'center', paddingTop: 20, paddingHorizontal: 10, gap: 4 },
   headerText: { marginTop: 8 },
   photoSpinner: { ...StyleSheet.absoluteFill },

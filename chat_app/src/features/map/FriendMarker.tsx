@@ -5,7 +5,7 @@ import { Text } from 'react-native-paper';
 
 import { UserAvatar } from '@/components/UserAvatar';
 import type { MapFriend } from '@/models/map-friend';
-import { palette } from '@/theme/app-theme';
+import { colors } from '@/theme/app-theme';
 
 /** A location updated this recently counts as "live". */
 const LIVE_WINDOW_MS = 5 * 60 * 1000;
@@ -54,7 +54,7 @@ export function FriendMarker({ friend, now }: { friend: MapFriend; now: number }
 }
 
 const styles = StyleSheet.create({
-  avatar: { borderWidth: 2, borderColor: palette.white, borderRadius: 20 },
+  avatar: { borderWidth: 2, borderColor: colors.surface, borderRadius: 20 },
   liveBadge: {
     position: 'absolute',
     right: 0,
@@ -62,9 +62,9 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: '#4CAF50',
+    backgroundColor: colors.success,
     borderWidth: 2,
-    borderColor: palette.white,
+    borderColor: colors.surface,
   },
   callout: { maxWidth: 220, padding: 4 },
 });

@@ -1,5 +1,6 @@
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { IconButton, Text } from 'react-native-paper';
@@ -64,6 +65,8 @@ export function StoryViewerScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Light status bar over the black background; the app default is dark. */}
+      <StatusBar style="light" />
       {story && item ? (
         <>
           <Image

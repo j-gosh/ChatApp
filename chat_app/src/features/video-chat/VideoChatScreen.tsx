@@ -15,7 +15,7 @@ import type { ChatUser } from '@/models/chat';
 import { useSignedInUser } from '@/providers/AuthStateProvider';
 import { useVideoClient } from '@/providers/StreamVideoProvider';
 import { showSnackbar } from '@/stores/snackbar-store';
-import { palette } from '@/theme/app-theme';
+import { colors } from '@/theme/app-theme';
 
 /** Requests camera and microphone access on first visit. */
 function useCallPermissions() {
@@ -118,7 +118,7 @@ export function VideoChatScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
+  container: { flex: 1, backgroundColor: colors.surface },
   body: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 8, padding: 24 },
   hint: { textAlign: 'center' },
   callButton: {
@@ -127,8 +127,8 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: palette.amber,
+    backgroundColor: colors.primary,
   },
   callButtonPressed: { opacity: 0.8 },
-  callButtonText: { fontSize: 20 },
+  callButtonText: { fontSize: 20, color: colors.onPrimary },
 });

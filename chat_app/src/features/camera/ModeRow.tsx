@@ -3,8 +3,10 @@ import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import Animated, { FadeInDown, FadeOutUp } from 'react-native-reanimated';
 
-const ACTIVE_COLOR = '#FF9800';
-const INACTIVE_COLOR = '#2196F3';
+import { colors } from '@/theme/app-theme';
+
+const ACTIVE_COLOR = colors.primary;
+const INACTIVE_COLOR = colors.textMuted;
 
 export interface ModeOption<T extends string> {
   value: T;
@@ -48,7 +50,7 @@ export function ModeRow<T extends string>({
 }
 
 const styles = StyleSheet.create({
-  container: { backgroundColor: '#FAFAFA', paddingVertical: 4 },
+  container: { backgroundColor: colors.background, paddingVertical: 4 },
   title: { textAlign: 'center' },
   options: { flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap' },
 });

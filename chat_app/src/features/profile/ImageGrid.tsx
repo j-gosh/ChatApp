@@ -2,6 +2,8 @@ import { Image } from 'expo-image';
 import { FlatList, Pressable, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
 
+import { colors } from '@/theme/app-theme';
+
 export interface GridImage {
   id: string;
   uri: string;
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1 / 3,
     aspectRatio: 9.9 / 15.7,
     borderWidth: 1,
-    borderColor: '#000000',
+    borderColor: colors.outline,
     borderRadius: 6,
     overflow: 'hidden',
   },

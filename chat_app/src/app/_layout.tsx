@@ -14,7 +14,7 @@ SplashScreen.preventAutoHideAsync().catch((error: unknown) => {
 export default function RootLayout() {
   return (
     <AppProviders>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
       <RootNavigator />
     </AppProviders>
   );

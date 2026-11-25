@@ -2,9 +2,11 @@ import type { ComponentProps } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 
+import { colors } from '@/theme/app-theme';
+
 const variants = {
-  confirm: 'rgb(210, 217, 131)',
-  cancel: 'rgb(223, 217, 218)',
+  confirm: { button: colors.primary, text: colors.onPrimary },
+  cancel: { button: colors.surfaceVariant, text: colors.text },
 } as const;
 
 /** Fixed-width action button used at the bottom of the onboarding sheets. */
@@ -18,8 +20,8 @@ export function SheetButton({
     <Button
       {...props}
       mode="contained"
-      buttonColor={variants[variant]}
-      textColor="#000000"
+      buttonColor={variants[variant].button}
+      textColor={variants[variant].text}
       style={styles.button}
     />
   );

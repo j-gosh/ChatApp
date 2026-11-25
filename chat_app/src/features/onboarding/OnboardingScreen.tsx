@@ -8,6 +8,7 @@ import { AppBottomSheet } from '@/components/AppBottomSheet';
 import { LoginForm } from '@/features/onboarding/LoginForm';
 import { RegisterForm } from '@/features/onboarding/RegisterForm';
 import { ResetPasswordForm } from '@/features/onboarding/ResetPasswordForm';
+import { colors } from '@/theme/app-theme';
 
 type Sheet = 'login' | 'register' | 'resetPassword';
 
@@ -63,7 +64,7 @@ export function OnboardingScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
+  container: { flex: 1, backgroundColor: colors.surface },
   buttons: { paddingTop: 70 },
   button: { margin: 5 },
 });

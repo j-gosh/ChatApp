@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ActivityIndicator, IconButton, Text } from 'react-native-paper';
@@ -46,9 +47,13 @@ export function SnapViewerScreen() {
     />
   );
 
+  // Light status bar over the black background; the app default is dark.
+  const statusBar = <StatusBar style="light" />;
+
   if (snap.isLoading) {
     return (
       <SafeAreaView style={[styles.container, styles.centered]}>
+        {statusBar}
         <ActivityIndicator />
       </SafeAreaView>
     );
@@ -58,6 +63,7 @@ export function SnapViewerScreen() {
     if (snap.error) console.error('[snaps] Could not load snap', snap.error);
     return (
       <SafeAreaView style={[styles.container, styles.centered]}>
+        {statusBar}
         <Text style={styles.text}>
           {snap.error
             ? "Couldn't load this snap. Try again later."
@@ -70,6 +76,7 @@ export function SnapViewerScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      {statusBar}
       <Image
         source={{ uri: snap.data.imageUrl }}
         style={StyleSheet.absoluteFill}

@@ -11,6 +11,7 @@ import {
 import { useUserProfile } from '@/hooks/user/use-user-profile';
 import type { LocationSharingMode } from '@/models/user-profile';
 import { showSnackbar } from '@/stores/snackbar-store';
+import { colors } from '@/theme/app-theme';
 import { getDataErrorMessage } from '@/utils/errors';
 
 const SHARING_OPTIONS: { value: LocationSharingMode; title: string; description: string }[] = [
@@ -124,7 +125,7 @@ export function SettingsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
+  container: { flex: 1, backgroundColor: colors.surface },
   content: { padding: 12, paddingBottom: 32 },
   note: { paddingHorizontal: 16, paddingTop: 4 },
   divider: { marginVertical: 20 },

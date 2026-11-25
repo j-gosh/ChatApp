@@ -14,6 +14,7 @@ import { useUserProfile } from '@/hooks/user/use-user-profile';
 import { getUserDisplayName } from '@/models/chat';
 import { useSignedInUser } from '@/providers/AuthStateProvider';
 import { showSnackbar } from '@/stores/snackbar-store';
+import { colors } from '@/theme/app-theme';
 import { getDataErrorMessage } from '@/utils/errors';
 
 /** Another user's profile, with their stats and a Follow button. */
@@ -74,7 +75,7 @@ export function SelectedProfileScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
+  container: { flex: 1, backgroundColor: colors.surface },
   header: { alignItems: 'center', paddingTop: 20, paddingHorizontal: 10, gap: 4 },
   avatar: { marginBottom: 8 },
   stats: { flexDirection: 'row', justifyContent: 'space-evenly', paddingVertical: 12 },

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { IconButton, Text, TextInput } from 'react-native-paper';
 
+import { colors } from '@/theme/app-theme';
+
 interface LocalMessage {
   id: string;
   text: string;
@@ -45,20 +47,20 @@ export function InCallChat() {
           onSubmitEditing={send}
           returnKeyType="send"
         />
-        <IconButton icon="send" iconColor="#448AFF" onPress={send} accessibilityLabel="Send" />
+        <IconButton icon="send" iconColor={colors.primary} onPress={send} accessibilityLabel="Send" />
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
+  container: { flex: 1, backgroundColor: colors.surface },
   list: { padding: 8, gap: 8 },
   bubble: {
     alignSelf: 'flex-start',
     padding: 10,
     borderRadius: 8,
-    backgroundColor: 'rgba(68, 138, 255, 0.2)',
+    backgroundColor: colors.primaryContainer,
   },
   inputRow: { flexDirection: 'row', alignItems: 'center', padding: 8, gap: 8 },
   input: { flex: 1 },

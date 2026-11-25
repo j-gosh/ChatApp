@@ -2,6 +2,8 @@ import { Image } from 'expo-image';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { StyleSheet, View } from 'react-native';
 
+import { colors } from '@/theme/app-theme';
+
 export type Capture = { type: 'photo' | 'video'; uri: string };
 
 function VideoThumbnail({ uri }: { uri: string }) {
@@ -32,6 +34,6 @@ export function CaptureThumbnail({ capture }: { capture: Capture | null }) {
 
 const styles = StyleSheet.create({
   container: { width: 64, height: 64, borderRadius: 4, overflow: 'hidden' },
-  videoBorder: { borderWidth: 2, borderColor: '#E91E63' },
+  videoBorder: { borderWidth: 2, borderColor: colors.accent },
   media: { flex: 1 },
 });
