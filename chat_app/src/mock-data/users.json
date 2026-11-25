@@ -1,0 +1,82 @@
+{
+  "ada": {
+    "firstName": "Ada",
+    "lastName": "Lovelace",
+    "imageUrl": "https://i.pravatar.cc/300?img=47",
+    "role": "user",
+    "createdAt": "2026-01-10T09:00:00Z",
+    "updatedAt": "2026-11-20T18:30:00Z",
+    "lastSeen": "2026-11-24T08:15:00Z",
+    "metadata": { "status": "Writing the first program" }
+  },
+  "grace": {
+    "firstName": "Grace",
+    "lastName": "Hopper",
+    "imageUrl": "https://i.pravatar.cc/300?img=45",
+    "role": "admin",
+    "createdAt": "2026-01-12T10:00:00Z",
+    "updatedAt": "2026-11-18T12:00:00Z",
+    "lastSeen": "2026-11-24T07:50:00Z",
+    "metadata": null
+  },
+  "alan": {
+    "firstName": "Alan",
+    "lastName": "Turing",
+    "imageUrl": "https://i.pravatar.cc/300?img=12",
+    "role": "moderator",
+    "createdAt": "2026-02-01T14:20:00Z",
+    "updatedAt": "2026-11-15T16:45:00Z",
+    "lastSeen": "2026-11-23T22:10:00Z",
+    "metadata": { "pronouns": "he/him" }
+  },
+  "katherine": {
+    "firstName": "Katherine",
+    "lastName": "Johnson",
+    "imageUrl": "https://i.pravatar.cc/300?img=32",
+    "role": "agent",
+    "createdAt": "2026-03-05T08:00:00Z",
+    "updatedAt": "2026-10-30T11:00:00Z",
+    "lastSeen": "2026-11-22T19:30:00Z",
+    "metadata": null
+  },
+  "margaret": {
+    "firstName": "Margaret",
+    "lastName": "Hamilton",
+    "imageUrl": null,
+    "role": "user",
+    "createdAt": "2026-04-18T13:00:00Z",
+    "updatedAt": "2026-11-01T09:30:00Z",
+    "lastSeen": "2026-11-24T06:00:00Z",
+    "metadata": null
+  },
+  "linus": {
+    "firstName": "Linus",
+    "lastName": "Torvalds",
+    "imageUrl": "https://i.pravatar.cc/300?img=59",
+    "role": null,
+    "createdAt": "2026-05-22T17:00:00Z",
+    "updatedAt": "2026-11-10T10:00:00Z",
+    "lastSeen": "2026-11-21T15:00:00Z",
+    "metadata": null
+  },
+  "legacy-user": {
+    "firstName": "Taylor",
+    "lastName": "Legacy",
+    "imageUrl": null,
+    "role": null,
+    "createdAt": "2025-06-01T12:00:00Z",
+    "updatedAt": "2025-06-01T12:00:00Z",
+    "lastSeen": "2025-09-14T12:00:00Z",
+    "metadata": null
+  },
+  "disabled-user": {
+    "firstName": "Dana",
+    "lastName": "Disabled",
+    "imageUrl": null,
+    "role": "user",
+    "createdAt": "2026-02-14T12:00:00Z",
+    "updatedAt": "2026-02-14T12:00:00Z",
+    "lastSeen": "2026-02-20T12:00:00Z",
+    "metadata": null
+  }
+}

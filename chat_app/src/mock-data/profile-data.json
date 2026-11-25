@@ -1,0 +1,75 @@
+{
+  "ada": {
+    "userName": "ada_lovelace",
+    "first": "Ada",
+    "last": "Lovelace",
+    "groups": [
+      {
+        "createdBy": "ada",
+        "groupId": "room-group-engine",
+        "members": [
+          { "userName": "ada_lovelace", "first": "Ada", "last": "Lovelace" },
+          { "userName": "grace_hopper", "first": "Grace", "last": "Hopper" },
+          { "userName": "alan_turing", "first": "Alan", "last": "Turing" },
+          { "userName": "margaret_hamilton", "first": "Margaret", "last": "Hamilton" }
+        ]
+      }
+    ],
+    "snapCount": 12,
+    "locationSharing": "whileUsing"
+  },
+  "grace": {
+    "userName": "grace_hopper",
+    "first": "Grace",
+    "last": "Hopper",
+    "groups": [],
+    "snapCount": 41,
+    "locationSharing": "always"
+  },
+  "alan": {
+    "userName": "alan_turing",
+    "first": "Alan",
+    "last": "Turing",
+    "groups": [
+      {
+        "createdBy": "ada",
+        "groupId": "room-group-engine",
+        "members": [
+          { "userName": "ada_lovelace", "first": "Ada", "last": "Lovelace" },
+          { "userName": "alan_turing", "first": "Alan", "last": "Turing" }
+        ]
+      }
+    ],
+    "snapCount": 7,
+    "locationSharing": "off"
+  },
+  "katherine": {
+    "userName": "katherine_johnson",
+    "first": "Katherine",
+    "last": "Johnson"
+  },
+  "margaret": {
+    "userName": "margaret_hamilton",
+    "first": "Margaret",
+    "last": "Hamilton",
+    "groups": [],
+    "snapCount": 3,
+    "locationSharing": "whileUsing"
+  },
+  "linus": {
+    "userName": "linus_torvalds",
+    "first": "Linus",
+    "last": "Torvalds",
+    "groups": [],
+    "snapCount": 0,
+    "locationSharing": "off"
+  },
+  "disabled-user": {
+    "userName": "dana_disabled",
+    "first": "Dana",
+    "last": "Disabled",
+    "groups": [],
+    "snapCount": 0,
+    "locationSharing": "off"
+  }
+}

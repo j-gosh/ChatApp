@@ -1,0 +1,42 @@
+{
+  "batchGrace1_ada": {
+    "batchId": "batchGrace1",
+    "senderId": "grace",
+    "senderName": "Grace Hopper",
+    "recipientId": "ada",
+    "storagePath": "snaps/grace/batchGrace1/image.jpg",
+    "createdAt": "2026-11-24T07:40:00Z"
+  },
+  "batchGrace1_alan": {
+    "batchId": "batchGrace1",
+    "senderId": "grace",
+    "senderName": "Grace Hopper",
+    "recipientId": "alan",
+    "storagePath": "snaps/grace/batchGrace1/image.jpg",
+    "createdAt": "2026-11-24T07:40:00Z"
+  },
+  "batchAlan1_ada": {
+    "batchId": "batchAlan1",
+    "senderId": "alan",
+    "senderName": "Alan Turing",
+    "recipientId": "ada",
+    "storagePath": "snaps/alan/batchAlan1/image.jpg",
+    "createdAt": "2026-11-23T19:00:00Z"
+  },
+  "batchMargaret1_ada": {
+    "batchId": "batchMargaret1",
+    "senderId": "margaret",
+    "senderName": "Margaret Hamilton",
+    "recipientId": "ada",
+    "storagePath": "snaps/margaret/batchMargaret1/image.jpg",
+    "createdAt": "2026-11-21T09:00:00Z"
+  },
+  "batchAda1_grace": {
+    "batchId": "batchAda1",
+    "senderId": "ada",
+    "senderName": "Ada Lovelace",
+    "recipientId": "grace",
+    "storagePath": "snaps/ada/batchAda1/image.jpg",
+    "createdAt": "2026-11-24T08:05:00Z"
+  }
+}

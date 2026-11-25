@@ -1,0 +1,126 @@
+{
+  "room-ada-grace": {
+    "msg-ag-1": {
+      "authorId": "grace",
+      "createdAt": "2026-11-24T07:55:00Z",
+      "updatedAt": "2026-11-24T07:55:00Z",
+      "type": "text",
+      "text": "Found a moth in the relay again 🦋"
+    },
+    "msg-ag-2": {
+      "authorId": "ada",
+      "createdAt": "2026-11-24T08:02:00Z",
+      "updatedAt": "2026-11-24T08:02:00Z",
+      "type": "text",
+      "text": "Tape it into the logbook — first actual bug found!"
+    },
+    "msg-ag-3": {
+      "authorId": "grace",
+      "createdAt": "2026-11-24T08:06:00Z",
+      "updatedAt": "2026-11-24T08:06:00Z",
+      "type": "image",
+      "name": "moth.jpg",
+      "size": 204800,
+      "uri": "https://picsum.photos/seed/moth/800/600",
+      "width": 800,
+      "height": 600
+    },
+    "msg-ag-4": {
+      "authorId": "grace",
+      "createdAt": "2026-11-24T08:10:00Z",
+      "updatedAt": "2026-11-24T08:10:00Z",
+      "type": "text",
+      "text": "Done. Coffee later?"
+    }
+  },
+  "room-ada-alan": {
+    "msg-aa-1": {
+      "authorId": "alan",
+      "createdAt": "2026-11-23T21:30:00Z",
+      "updatedAt": "2026-11-23T21:30:00Z",
+      "type": "text",
+      "text": "Can machines think?"
+    },
+    "msg-aa-2": {
+      "authorId": "ada",
+      "createdAt": "2026-11-23T21:35:00Z",
+      "updatedAt": "2026-11-23T21:35:00Z",
+      "type": "text",
+      "text": "They can only do whatever we know how to order them to perform."
+    },
+    "msg-aa-3": {
+      "authorId": "alan",
+      "createdAt": "2026-11-23T21:40:00Z",
+      "updatedAt": "2026-11-23T21:40:00Z",
+      "type": "file",
+      "name": "computing-machinery.pdf",
+      "size": 1048576,
+      "mimeType": "application/pdf",
+      "uri": "https://example.com/computing-machinery.pdf"
+    }
+  },
+  "room-ada-katherine": {
+    "msg-ak-1": {
+      "authorId": "katherine",
+      "createdAt": "2026-11-02T13:50:00Z",
+      "updatedAt": "2026-11-02T13:50:00Z",
+      "type": "text",
+      "text": "Checked the trajectory numbers by hand. They hold."
+    },
+    "msg-ak-2": {
+      "authorId": "ada",
+      "createdAt": "2026-11-02T14:00:00Z",
+      "updatedAt": "2026-11-02T14:00:00Z",
+      "type": "text",
+      "text": "Then we're go for launch 🚀"
+    }
+  },
+  "room-group-engine": {
+    "msg-ge-1": {
+      "authorId": "margaret",
+      "createdAt": "2026-11-24T07:00:00Z",
+      "updatedAt": "2026-11-24T07:00:00Z",
+      "type": "text",
+      "text": "Priority scheduling is in. Alarms are just warnings now."
+    },
+    "msg-ge-2": {
+      "authorId": "alan",
+      "createdAt": "2026-11-24T07:15:00Z",
+      "updatedAt": "2026-11-24T07:15:00Z",
+      "type": "text",
+      "text": "Nice. Shall we review the punch cards tomorrow?"
+    },
+    "msg-ge-3": {
+      "authorId": "grace",
+      "createdAt": "2026-11-24T07:20:00Z",
+      "updatedAt": "2026-11-24T07:20:00Z",
+      "type": "custom",
+      "metadata": { "kind": "poll", "question": "Tomorrow 10am?" }
+    },
+    "msg-ge-4": {
+      "authorId": "ada",
+      "createdAt": "2026-11-24T07:30:00Z",
+      "updatedAt": "2026-11-24T07:30:00Z",
+      "type": "text",
+      "text": "Works for me."
+    }
+  },
+  "room-channel-announcements": {
+    "msg-ca-1": {
+      "authorId": "grace",
+      "createdAt": "2026-11-20T09:00:00Z",
+      "updatedAt": "2026-11-20T09:00:00Z",
+      "type": "text",
+      "text": "Welcome to the app! Be kind, ship often."
+    }
+  },
+  "room-grace-linus": {
+    "msg-gl-1": {
+      "authorId": "linus",
+      "createdAt": "2026-11-19T16:00:00Z",
+      "updatedAt": "2026-11-19T16:00:00Z",
+      "type": "text",
+      "text": "Talk is cheap. Show me the code."
+    }
+  }
+}

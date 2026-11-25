@@ -1,0 +1,114 @@
+{
+  "ada": {
+    "grace": {
+      "id": "grace",
+      "firstName": "Grace",
+      "lastName": "Hopper",
+      "imageUrl": "https://i.pravatar.cc/300?img=45"
+    },
+    "alan": {
+      "id": "alan",
+      "firstName": "Alan",
+      "lastName": "Turing",
+      "imageUrl": "https://i.pravatar.cc/300?img=12"
+    },
+    "margaret": {
+      "id": "margaret",
+      "firstName": "Margaret",
+      "lastName": "Hamilton",
+      "imageUrl": null
+    },
+    "Xq7aB2kLm9PzR4tV1wYc": {
+      "id": "katherine",
+      "firstName": "Katherine",
+      "lastName": "Johnson",
+      "imageUrl": "https://i.pravatar.cc/300?img=32",
+      "role": "agent",
+      "createdAt": "2026-03-06T08:00:00Z",
+      "updatedAt": "2026-03-06T08:00:00Z",
+      "lastSeen": "2026-03-06T08:00:00Z",
+      "metadata": null
+    },
+    "Hd3Fq8sNw2ZcY6uJ0pLe": {
+      "id": "grace",
+      "firstName": "Grace",
+      "lastName": "Hopper",
+      "imageUrl": "https://i.pravatar.cc/300?img=45",
+      "role": "admin",
+      "createdAt": "2026-01-15T10:00:00Z",
+      "updatedAt": "2026-01-15T10:00:00Z",
+      "lastSeen": "2026-01-15T10:00:00Z",
+      "metadata": null
+    }
+  },
+  "grace": {
+    "ada": {
+      "id": "ada",
+      "firstName": "Ada",
+      "lastName": "Lovelace",
+      "imageUrl": "https://i.pravatar.cc/300?img=47"
+    },
+    "alan": {
+      "id": "alan",
+      "firstName": "Alan",
+      "lastName": "Turing",
+      "imageUrl": "https://i.pravatar.cc/300?img=12"
+    },
+    "linus": {
+      "id": "linus",
+      "firstName": "Linus",
+      "lastName": "Torvalds",
+      "imageUrl": "https://i.pravatar.cc/300?img=59"
+    }
+  },
+  "alan": {
+    "ada": {
+      "id": "ada",
+      "firstName": "Ada",
+      "lastName": "Lovelace",
+      "imageUrl": "https://i.pravatar.cc/300?img=47"
+    },
+    "grace": {
+      "id": "grace",
+      "firstName": "Grace",
+      "lastName": "Hopper",
+      "imageUrl": "https://i.pravatar.cc/300?img=45"
+    }
+  },
+  "katherine": {
+    "ada": {
+      "id": "ada",
+      "firstName": "Ada",
+      "lastName": "Lovelace",
+      "imageUrl": "https://i.pravatar.cc/300?img=47"
+    },
+    "margaret": {
+      "id": "margaret",
+      "firstName": "Margaret",
+      "lastName": "Hamilton",
+      "imageUrl": null
+    }
+  },
+  "margaret": {
+    "ada": {
+      "id": "ada",
+      "firstName": "Ada",
+      "lastName": "Lovelace",
+      "imageUrl": "https://i.pravatar.cc/300?img=47"
+    },
+    "katherine": {
+      "id": "katherine",
+      "firstName": "Katherine",
+      "lastName": "Johnson",
+      "imageUrl": "https://i.pravatar.cc/300?img=32"
+    }
+  },
+  "linus": {
+    "grace": {
+      "id": "grace",
+      "firstName": "Grace",
+      "lastName": "Hopper",
+      "imageUrl": "https://i.pravatar.cc/300?img=45"
+    }
+  }
+}

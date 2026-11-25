@@ -1,0 +1,27 @@
+{
+  "sub-tech": {
+    "label": "Tech Daily",
+    "imageUrl": "https://picsum.photos/seed/sub-tech/300/300",
+    "order": 1
+  },
+  "sub-space": {
+    "label": "Space Now",
+    "imageUrl": "https://picsum.photos/seed/sub-space/300/300",
+    "order": 2
+  },
+  "sub-sports": {
+    "label": "Sports Hub",
+    "imageUrl": "https://picsum.photos/seed/sub-sports/300/300",
+    "order": 3
+  },
+  "sub-music": {
+    "label": "Music Mix",
+    "imageUrl": "https://picsum.photos/seed/sub-music/300/300",
+    "order": 4
+  },
+  "sub-food": {
+    "label": "Food & Co",
+    "imageUrl": "https://picsum.photos/seed/sub-food/300/300",
+    "order": 5
+  }
+}

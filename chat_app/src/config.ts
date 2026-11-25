@@ -8,3 +8,9 @@ export const streamApiKey = process.env.EXPO_PUBLIC_STREAM_API_KEY;
  * Android emulator). Unset in normal builds.
  */
 export const firebaseEmulatorHost = process.env.EXPO_PUBLIC_FIREBASE_EMULATOR_HOST;
+
+/**
+ * Debug builds read the JSON fixtures in `src/mock-data` instead of Firebase,
+ * unless they point at the Firebase emulators (e.g. for end-to-end tests).
+ */
+export const isMockDataEnabled = __DEV__ && !firebaseEmulatorHost;

@@ -1,0 +1,40 @@
+{
+  "news-1": {
+    "title": "Compilers make programming accessible to everyone",
+    "thumbnailUrl": "https://picsum.photos/seed/news-1/600/400",
+    "summary": "A new generation of tools translates English-like code into machine instructions.",
+    "content": "Developers can now write programs in words instead of numbers. Early adopters report fewer bugs and faster delivery.",
+    "category": "Technology",
+    "publishedAt": "2026-11-24T06:00:00Z"
+  },
+  "news-2": {
+    "title": "Moon mission trajectory confirmed",
+    "thumbnailUrl": "https://picsum.photos/seed/news-2/600/400",
+    "summary": "Hand-checked calculations match the electronic computer's output.",
+    "content": "The flight team says launch preparations remain on schedule.",
+    "category": "Science",
+    "publishedAt": "2026-11-23T15:00:00Z"
+  },
+  "news-3": {
+    "title": "Local marathon draws record crowd",
+    "thumbnailUrl": "https://picsum.photos/seed/news-3/600/400",
+    "summary": "Thousands of runners took to the streets this weekend.",
+    "content": "",
+    "category": "Sports",
+    "publishedAt": "2026-11-22T09:00:00Z"
+  },
+  "news-4": {
+    "title": "Open-source kernel hits a new milestone",
+    "thumbnailUrl": "https://picsum.photos/seed/news-4/600/400",
+    "category": "Technology",
+    "publishedAt": "2026-11-21T18:00:00Z"
+  },
+  "news-5": {
+    "title": "Five photo spots for golden hour",
+    "thumbnailUrl": "https://picsum.photos/seed/news-5/600/400",
+    "summary": "Make the most of the short autumn evenings.",
+    "content": "From rooftops to riversides, here are the best places to catch the light.",
+    "category": "Lifestyle",
+    "publishedAt": "2026-11-20T12:00:00Z"
+  }
+}

@@ -1,0 +1,59 @@
+[
+  {
+    "uid": "ada",
+    "email": "ada@example.com",
+    "password": "password123",
+    "displayName": "Ada Lovelace",
+    "photoURL": "https://i.pravatar.cc/300?img=47"
+  },
+  {
+    "uid": "grace",
+    "email": "grace@example.com",
+    "password": "password123",
+    "displayName": "Grace Hopper",
+    "photoURL": "https://i.pravatar.cc/300?img=45"
+  },
+  {
+    "uid": "alan",
+    "email": "alan@example.com",
+    "password": "password123",
+    "displayName": "Alan Turing",
+    "photoURL": "https://i.pravatar.cc/300?img=12"
+  },
+  {
+    "uid": "katherine",
+    "email": "katherine@example.com",
+    "password": "password123",
+    "displayName": "Katherine Johnson",
+    "photoURL": "https://i.pravatar.cc/300?img=32"
+  },
+  {
+    "uid": "margaret",
+    "email": "margaret@example.com",
+    "password": "password123",
+    "displayName": "Margaret Hamilton",
+    "photoURL": null
+  },
+  {
+    "uid": "linus",
+    "email": "linus@example.com",
+    "password": "password123",
+    "displayName": "Linus Torvalds",
+    "photoURL": "https://i.pravatar.cc/300?img=59"
+  },
+  {
+    "uid": "legacy-user",
+    "email": "legacy@example.com",
+    "password": "password123",
+    "displayName": "Taylor Legacy",
+    "photoURL": null
+  },
+  {
+    "uid": "disabled-user",
+    "email": "disabled@example.com",
+    "password": "password123",
+    "displayName": "Dana Disabled",
+    "photoURL": null,
+    "disabled": true
+  }
+]

@@ -1,0 +1,90 @@
+{
+  "story-ada-1": {
+    "ownerId": "ada",
+    "ownerName": "Ada Lovelace",
+    "ownerImageUrl": "https://i.pravatar.cc/300?img=47",
+    "imageUrl": "https://picsum.photos/seed/story-ada-1/1080/1920",
+    "storagePath": "stories/ada/story-ada-1/image.jpg",
+    "caption": "Notes on the engine, part G",
+    "visibility": "friends",
+    "viewerIds": ["ada", "grace", "alan", "katherine", "margaret"],
+    "createdAt": "2026-11-23T18:00:00Z"
+  },
+  "story-ada-2": {
+    "ownerId": "ada",
+    "ownerName": "Ada Lovelace",
+    "ownerImageUrl": "https://i.pravatar.cc/300?img=47",
+    "imageUrl": "https://picsum.photos/seed/story-ada-2/1080/1920",
+    "storagePath": "stories/ada/story-ada-2/image.jpg",
+    "caption": "",
+    "visibility": "everyone",
+    "viewerIds": ["ada", "grace", "alan", "katherine", "margaret"],
+    "createdAt": "2026-11-24T06:30:00Z"
+  },
+  "story-grace-1": {
+    "ownerId": "grace",
+    "ownerName": "Grace Hopper",
+    "ownerImageUrl": "https://i.pravatar.cc/300?img=45",
+    "imageUrl": "https://picsum.photos/seed/story-grace-1/1080/1920",
+    "storagePath": "stories/grace/story-grace-1/image.jpg",
+    "caption": "A nanosecond is 11.8 inches of wire",
+    "visibility": "friends",
+    "viewerIds": ["grace", "ada", "alan", "linus"],
+    "createdAt": "2026-11-23T20:00:00Z"
+  },
+  "story-grace-2": {
+    "ownerId": "grace",
+    "ownerName": "Grace Hopper",
+    "ownerImageUrl": "https://i.pravatar.cc/300?img=45",
+    "imageUrl": "https://picsum.photos/seed/story-grace-2/1080/1920",
+    "storagePath": "stories/grace/story-grace-2/image.jpg",
+    "caption": "Public talk tonight!",
+    "visibility": "everyone",
+    "viewerIds": ["grace", "ada", "alan", "linus"],
+    "createdAt": "2026-11-24T07:45:00Z"
+  },
+  "story-alan-1": {
+    "ownerId": "alan",
+    "ownerName": "Alan Turing",
+    "ownerImageUrl": "https://i.pravatar.cc/300?img=12",
+    "imageUrl": "https://picsum.photos/seed/story-alan-1/1080/1920",
+    "storagePath": "stories/alan/story-alan-1/image.jpg",
+    "caption": "Morning run, 26 miles",
+    "visibility": "friends",
+    "viewerIds": ["alan", "ada", "grace"],
+    "createdAt": "2026-11-24T05:10:00Z"
+  },
+  "story-katherine-1": {
+    "ownerId": "katherine",
+    "ownerName": "Katherine Johnson",
+    "ownerImageUrl": null,
+    "imageUrl": "https://picsum.photos/seed/story-katherine-1/1080/1920",
+    "storagePath": "stories/katherine/story-katherine-1/image.jpg",
+    "caption": "Orbital mechanics, by hand",
+    "visibility": "friends",
+    "viewerIds": ["katherine", "ada", "margaret"],
+    "createdAt": "2026-11-22T15:00:00Z"
+  },
+  "story-linus-1": {
+    "ownerId": "linus",
+    "ownerName": "Linus Torvalds",
+    "ownerImageUrl": "https://i.pravatar.cc/300?img=59",
+    "imageUrl": "https://picsum.photos/seed/story-linus-1/1080/1920",
+    "storagePath": "stories/linus/story-linus-1/image.jpg",
+    "caption": "New release candidate is out",
+    "visibility": "everyone",
+    "viewerIds": ["linus", "grace"],
+    "createdAt": "2026-11-23T12:00:00Z"
+  },
+  "story-linus-2": {
+    "ownerId": "linus",
+    "ownerName": "Linus Torvalds",
+    "ownerImageUrl": "https://i.pravatar.cc/300?img=59",
+    "imageUrl": "https://picsum.photos/seed/story-linus-2/1080/1920",
+    "storagePath": "stories/linus/story-linus-2/image.jpg",
+    "caption": "Friends only: penguin sighting",
+    "visibility": "friends",
+    "viewerIds": ["linus", "grace"],
+    "createdAt": "2026-11-23T13:00:00Z"
+  }
+}

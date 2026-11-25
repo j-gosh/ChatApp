@@ -1,0 +1,26 @@
+{
+  "ada": {
+    "memory-ada-1": {
+      "imageUrl": "https://picsum.photos/seed/memory-ada-1/1080/1080",
+      "storagePath": "memories/ada/memory-ada-1/image.jpg",
+      "createdAt": "2026-11-22T17:00:00Z"
+    },
+    "memory-ada-2": {
+      "imageUrl": "https://picsum.photos/seed/memory-ada-2/1080/1080",
+      "storagePath": "memories/ada/memory-ada-2/image.jpg",
+      "createdAt": "2026-10-31T20:00:00Z"
+    },
+    "memory-ada-3": {
+      "imageUrl": "https://picsum.photos/seed/memory-ada-3/1080/1080",
+      "storagePath": "memories/ada/memory-ada-3/image.jpg",
+      "createdAt": "2026-08-15T12:00:00Z"
+    }
+  },
+  "grace": {
+    "memory-grace-1": {
+      "imageUrl": "https://picsum.photos/seed/memory-grace-1/1080/1080",
+      "storagePath": "memories/grace/memory-grace-1/image.jpg",
+      "createdAt": "2026-11-01T10:00:00Z"
+    }
+  }
+}

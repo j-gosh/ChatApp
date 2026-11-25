@@ -1,0 +1,49 @@
+{
+  "ada": {
+    "latitude": 51.5072,
+    "longitude": -0.1276,
+    "displayName": "Ada Lovelace",
+    "imageUrl": "https://i.pravatar.cc/300?img=47",
+    "viewerIds": ["ada", "grace", "alan", "katherine", "margaret"],
+    "updatedAt": "2026-11-24T08:00:00Z"
+  },
+  "grace": {
+    "latitude": 40.7128,
+    "longitude": -74.006,
+    "displayName": "Grace Hopper",
+    "imageUrl": "https://i.pravatar.cc/300?img=45",
+    "viewerIds": ["grace", "ada", "alan", "linus"],
+    "updatedAt": "2026-11-24T07:58:00Z"
+  },
+  "alan": {
+    "latitude": 52.0406,
+    "longitude": -0.7594,
+    "displayName": "Alan Turing",
+    "imageUrl": "https://i.pravatar.cc/300?img=12",
+    "viewerIds": ["alan", "ada", "grace"],
+    "updatedAt": "2026-11-23T22:00:00Z"
+  },
+  "katherine": {
+    "latitude": 37.0871,
+    "longitude": -76.3452,
+    "displayName": "Katherine Johnson",
+    "imageUrl": null,
+    "viewerIds": ["katherine", "ada", "margaret"],
+    "updatedAt": "2026-11-20T10:00:00Z"
+  },
+  "margaret": {
+    "latitude": 42.3601,
+    "longitude": -71.0589,
+    "displayName": "Margaret Hamilton",
+    "viewerIds": ["margaret", "ada", "katherine"],
+    "updatedAt": "2026-11-24T06:05:00Z"
+  },
+  "linus": {
+    "latitude": 45.5152,
+    "longitude": -122.6784,
+    "displayName": "Linus Torvalds",
+    "imageUrl": "https://i.pravatar.cc/300?img=59",
+    "viewerIds": ["linus", "grace"],
+    "updatedAt": "2026-11-21T15:00:00Z"
+  }
+}

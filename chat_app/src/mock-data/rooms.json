@@ -1,0 +1,62 @@
+{
+  "room-ada-grace": {
+    "createdAt": "2026-02-01T12:05:00Z",
+    "updatedAt": "2026-11-24T08:10:00Z",
+    "imageUrl": null,
+    "metadata": null,
+    "name": null,
+    "type": "direct",
+    "userIds": ["ada", "grace"],
+    "userRoles": null
+  },
+  "room-ada-alan": {
+    "createdAt": "2026-03-10T09:00:00Z",
+    "updatedAt": "2026-11-23T21:40:00Z",
+    "imageUrl": null,
+    "metadata": null,
+    "name": null,
+    "type": "direct",
+    "userIds": ["ada", "alan"],
+    "userRoles": null
+  },
+  "room-ada-katherine": {
+    "createdAt": "2026-03-06T08:30:00Z",
+    "updatedAt": "2026-11-02T14:00:00Z",
+    "imageUrl": null,
+    "metadata": null,
+    "name": null,
+    "type": "direct",
+    "userIds": ["ada", "katherine"],
+    "userRoles": null
+  },
+  "room-group-engine": {
+    "createdAt": "2026-04-20T10:00:00Z",
+    "updatedAt": "2026-11-24T07:30:00Z",
+    "imageUrl": "https://picsum.photos/seed/engine-crew/300/300",
+    "metadata": { "description": "Planning the Analytical Engine" },
+    "name": "Analytical Engine Crew",
+    "type": "group",
+    "userIds": ["ada", "grace", "alan", "margaret"],
+    "userRoles": { "ada": "admin", "grace": "moderator" }
+  },
+  "room-channel-announcements": {
+    "createdAt": "2026-01-10T09:00:00Z",
+    "updatedAt": "2026-11-20T09:00:00Z",
+    "imageUrl": "https://picsum.photos/seed/announcements/300/300",
+    "metadata": { "readOnly": true },
+    "name": "Announcements",
+    "type": "channel",
+    "userIds": ["ada", "grace", "alan", "katherine", "margaret", "linus"],
+    "userRoles": { "grace": "admin" }
+  },
+  "room-grace-linus": {
+    "createdAt": "2026-06-12T12:00:00Z",
+    "updatedAt": "2026-11-19T16:00:00Z",
+    "imageUrl": null,
+    "metadata": null,
+    "name": null,
+    "type": "direct",
+    "userIds": ["grace", "linus"],
+    "userRoles": null
+  }
+}
