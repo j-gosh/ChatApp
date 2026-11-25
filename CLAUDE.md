@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Social video-chat app (chat, video calls, camera, friend map, stories). The app was ported from Flutter to **Expo / React Native (TypeScript)**. All data comes from Firebase (no bundled mock data); the repo is not connected to a Firebase project (see README "Running your own copy"). Code comments often reference the Flutter original (e.g. "the counterpart of a Riverpod `StreamProvider`").
+Social video-chat app (chat, video calls, camera, friend map, stories). The app was ported from Flutter to **Expo / React Native (TypeScript)**. Release builds read all data from Firebase; debug builds (`__DEV__`, no emulator host) read read-only JSON fixtures instead (see "Mock data" below). The repo is not connected to a Firebase project (see README "Running your own copy"). Code comments often reference the Flutter original (e.g. "the counterpart of a Riverpod `StreamProvider`").
 
 Repo layout:
 - `chat_app/` — Expo app (expo-router, React Native Firebase, Stream Video). Uses a dev client, not Expo Go.
@@ -71,6 +71,8 @@ Layering, top to bottom:
 3. **Services** — `src/services/*`. Each file defines an interface (auth, chat, user, video, story, snap, memory, location, content, media) plus a Firebase implementation. Story/snap/memory services take the `MediaService` (Storage uploads) in their constructor. They are injected via React context (`ServicesProvider` / `useServices()`), never imported directly by UI, so tests can swap in mocks.
 4. **Hooks / controllers** — `src/hooks/` wraps service reads; `src/controllers/use-*-controller.ts` wraps service writes/business logic.
 5. **Stores** — Zustand for small cross-screen UI state (`chat-store` selected room, `story-store` story open in the viewer, `ui-store` chat sub-page and last story visibility, `snackbar-store`).
+
+**Mock data**: when `isMockDataEnabled` (`src/config.ts`: `__DEV__` and no emulator host), `AppProviders` uses `createMockDataServices()` (`src/services/mock/`) instead of `createFirebaseServices()`. Fixtures live in `src/mock-data/*.json`, one file per Firestore collection, keyed by doc id with the same field shapes (ISO timestamps, converted to millis in `src/mock-data/index.ts`). Mock services mirror the Firebase queries' per-user filtering and parse with the same zod schemas; they are read-only (writes resolve without saving). Login is checked against `auth-accounts.json`. When adding a field or collection, update the fixtures too; `src/services/mock/__tests__/mock-services.test.ts` fails if any fixture is skipped by `parseDoc`. Jest is unaffected (`@test/render` injects its own services).
 
 The background location task (`src/services/location-task.ts`) is defined at module scope and imported from `src/app/_layout.tsx`; it runs without React, so it uses `FirebaseLocationService` directly.
 

@@ -2,6 +2,20 @@
 
 A comprehensive React Native (Expo) social communication app that combines video calling, messaging, camera features, and location sharing - inspired by popular social media platforms like Snapchat.
 
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center"><img src="images/chats.png" width="180" alt="Chat list"><br><sub>Chats</sub></td>
+    <td align="center"><img src="images/conversation.png" width="180" alt="Conversation thread"><br><sub>Conversation</sub></td>
+    <td align="center"><img src="images/discover.png" width="180" alt="Discover feed with subscriptions, news, and stories"><br><sub>Discover</sub></td>
+    <td align="center"><img src="images/profile-stories.png" width="180" alt="Profile showing stories"><br><sub>Profile: Stories</sub></td>
+    <td align="center"><img src="images/profile-memories.png" width="180" alt="Profile showing memories"><br><sub>Profile: Memories</sub></td>
+  </tr>
+</table>
+
+<sub>Screenshots use the debug build's mock data.</sub>
+
 ## Features
 
 ### 🎥 Video Chat
@@ -70,7 +84,7 @@ This project demonstrates a modern social communication app with comprehensive m
 
 1. Create a Firebase project and upgrade it to the Blaze plan (Cloud Functions and secrets need it).
 2. Enable **Authentication** (Email/Password), **Cloud Firestore**, and **Cloud Storage**.
-3. Register an iOS and an Android app using the bundle ID and package name in `chat_app/app.config.ts`, then put the downloaded `GoogleService-Info.plist` and `google-services.json` in `chat_app/`.
+3. Replace the placeholder `com.example.*` iOS bundle ID and Android package name in `chat_app/app.config.ts` with your own, register an iOS and an Android app with those IDs, then put the downloaded `GoogleService-Info.plist` and `google-services.json` in `chat_app/`.
 4. Copy `chat_app/.env.example` to `chat_app/.env` and fill in your Google Maps keys and Stream Video API key.
 5. Store the Stream secrets for the token function:
    ```bash
@@ -86,5 +100,7 @@ This project demonstrates a modern social communication app with comprehensive m
    - `news`: `title`, `thumbnailUrl`, `category`, `publishedAt` (timestamp), optional `summary` and `content`
    - `subscriptions`: `label`, `imageUrl`, `order` (number)
 8. Build and run the app from `chat_app/` with `npm install` and `npm run ios` or `npm run android`.
+
+Debug builds read read-only mock data from `chat_app/src/mock-data/` instead of Firestore, so screens are populated without a backend (sign in as `ada@example.com` / `password123`; see that folder's README). The native build still needs the Firebase config files from step 3. Release builds and emulator runs always use Firebase.
 
 To try everything locally instead, run `firebase emulators:start` from the repo root and start the app with `EXPO_PUBLIC_FIREBASE_EMULATOR_HOST=localhost` (`10.0.2.2` from an Android emulator).
