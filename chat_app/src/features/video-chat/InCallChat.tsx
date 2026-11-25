@@ -47,7 +47,12 @@ export function InCallChat() {
           onSubmitEditing={send}
           returnKeyType="send"
         />
-        <IconButton icon="send" iconColor={colors.primary} onPress={send} accessibilityLabel="Send" />
+        <IconButton
+          icon="send"
+          iconColor={colors.primary}
+          onPress={send}
+          accessibilityLabel="Send"
+        />
       </View>
     </View>
   );

@@ -18,7 +18,7 @@ interface Snapshot<T> {
 
 /**
  * Subscribes to a live data source for as long as the component is mounted —
- * 
+ *
  *
  * `subscribe` must be memoized (e.g. with `useCallback`); a new function
  * identity resubscribes and resets to the loading state.
