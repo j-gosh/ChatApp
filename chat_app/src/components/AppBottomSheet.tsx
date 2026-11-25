@@ -6,30 +6,31 @@ import {
 } from '@gorhom/bottom-sheet';
 import type { ReactNode, Ref } from 'react';
 import { StyleSheet } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function Backdrop(props: BottomSheetBackdropProps) {
   return <BottomSheetBackdrop {...props} appearsOnIndex={0} disappearsOnIndex={-1} />;
 }
 
 /**
- * Modal bottom sheet with a drag handle that closes on backdrop tap —
- * `.
+ * Modal bottom sheet with a drag handle that closes on backdrop tap. It sizes
+ * itself to its content so it can sit on top of the keyboard; a fixed tall
+ * height plus the keyboard overflows the screen and pushes the inputs out of view.
  */
 export function AppBottomSheet({
   ref,
-  heightPercent,
   children,
 }: {
   ref: Ref<BottomSheetModal>;
-  /** Sheet height as a percentage of the screen. */
-  heightPercent: number;
   children: ReactNode;
 }) {
+  const insets = useSafeAreaInsets();
+
   return (
     <BottomSheetModal
       ref={ref}
-      snapPoints={[`${heightPercent}%`]}
-      enableDynamicSizing={false}
+      // Keeps the sheet below the status bar when content + keyboard don't fit.
+      topInset={insets.top}
       backdropComponent={Backdrop}
       keyboardBehavior="interactive"
       keyboardBlurBehavior="restore"

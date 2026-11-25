@@ -34,7 +34,6 @@ export function LoginForm({ onClose }: { onClose: () => void }) {
 
   return (
     <View>
-      <Text style={styles.error}>{signIn.error ? getAuthErrorMessage(signIn.error) : ''}</Text>
       <FormTextInput
         testID="login-email"
         placeholder="Email"
@@ -59,6 +58,7 @@ export function LoginForm({ onClose }: { onClose: () => void }) {
         returnKeyType="done"
         onSubmitEditing={submit}
       />
+      <Text style={styles.error}>{signIn.error ? getAuthErrorMessage(signIn.error) : ''}</Text>
       <SheetButton
         testID="login-submit"
         variant="confirm"

@@ -11,12 +11,6 @@ import { ResetPasswordForm } from '@/features/onboarding/ResetPasswordForm';
 
 type Sheet = 'login' | 'register' | 'resetPassword';
 
-const sheetHeights: Record<Sheet, number> = {
-  login: 70,
-  register: 80,
-  resetPassword: 70,
-};
-
 /**
  * Landing screen for signed-out users. Opens the sign-in, register, and
  * forgot-password forms in bottom sheets.
@@ -59,7 +53,7 @@ export function OnboardingScreen() {
           Forgot Password
         </Button>
       </View>
-      <AppBottomSheet ref={sheetRef} heightPercent={sheetHeights[sheet]}>
+      <AppBottomSheet ref={sheetRef}>
         {sheet === 'login' && <LoginForm onClose={close} />}
         {sheet === 'register' && <RegisterForm onClose={close} />}
         {sheet === 'resetPassword' && <ResetPasswordForm onClose={close} />}
